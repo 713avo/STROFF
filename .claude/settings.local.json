@@ -6,7 +6,14 @@
       "Bash(done)",
       "Bash(awk:*)",
       "Bash(gh auth:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git init:*)",
+      "Bash(git commit:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh repo view:*)",
+      "Bash(git push:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)"
     ],
     "deny": [],
     "ask": []
