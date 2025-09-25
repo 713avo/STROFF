@@ -1,0 +1,790 @@
+# MANUAL COMPLETO DE STROFF
+# Guía definitiva para el formateador de textos STROFF
+# Versión 1.0 - 2025-09-25
+
+# ============================
+# CONFIGURACIÓN DEL DOCUMENTO
+# ============================
+.TITLE "Manual Completo de STROFF"
+.AUTH "Documentación Técnica"
+.DATE "2025-09-25"
+.PAGEWIDTH 80
+.PAGEHEIGHT 24
+.LMARGIN 4
+.RMARGIN 4
+.INDENT 4
+.TABSIZE 4
+.JUSTIFY FULL
+.LINESPACE 1
+.HEADER "{TITLE} — {CHAPTITLE}"
+.HEADALIGN LEFT
+.FOOTER "Página {PAGE} de {PAGES}"
+.FOOTALIGN CENTER
+
+# ============================
+# INICIO DEL DOCUMENTO
+# ============================
+.DOCUMENT
+.PAGEBREAK
+.MAKETOC
+.PAGEBREAK
+
+# ============================
+# CONTENIDO PRINCIPAL
+# ============================
+
+.CHAP "Introducción a STROFF"
+
+.P
+STROFF es un potente sistema de formateo de documentos basado en marcas de texto plano, inspirado en los legendarios sistemas RUNOFF y ROFF utilizados en los primeros sistemas Unix. Este manual le guiará paso a paso desde los conceptos más básicos hasta las técnicas avanzadas de formateo de documentos profesionales.
+
+.P
+Los sistemas de formateo de textos como STROFF pertenecen a una categoría de herramientas conocidas como procesadores de texto programables. A diferencia de los procesadores WYSIWYG (What You See Is What You Get) como Word o Writer, los sistemas de formateo por marcas separan completamente el contenido de la presentación. Esto significa que usted escribe el texto junto con comandos especiales llamados "directivas" o "marcas", y el sistema se encarga de generar la salida formateada final.
+
+.P
+La ventaja principal de este enfoque es el control preciso y consistente sobre el formato, especialmente útil para documentos técnicos, manuales, artículos académicos y cualquier documento que requiera una presentación profesional y uniforme. Además, al ser texto plano, los documentos STROFF son completamente portables, versionables con sistemas como Git, y pueden editarse con cualquier editor de texto.
+
+.SUBCHAP "Historia y Contexto"
+
+.P
+El sistema RUNOFF original fue desarrollado en los años 1960 en el MIT, siendo uno de los primeros sistemas de formateo de textos computarizados. Posteriormente, Bell Labs desarrolló ROFF y sus variantes (nroff, troff) que se convirtieron en estándares en sistemas Unix. Estos sistemas establecieron muchas de las convenciones que STROFF adopta y moderniza.
+
+.P
+STROFF toma lo mejor de estos sistemas clásicos y lo adapta a las necesidades modernas. Mantiene la simplicidad conceptual y la potencia de ROFF, pero con una sintaxis más clara y características modernas como justificación completa automática, paginación inteligente y generación automática de índices.
+
+.SUBCHAP "¿Por qué usar STROFF?"
+
+.P
+Existen varias razones para elegir STROFF sobre otros sistemas de formateo:
+
+.LIST TYPE=NUMBER INDENT=4
+.ITEM "Control preciso del formato: Cada aspecto del documento puede controlarse exactamente, desde márgenes hasta interlineado."
+.ITEM "Consistencia garantizada: El formato se mantiene consistente en todo el documento automáticamente."
+.ITEM "Separación contenido-formato: Puede cambiar la apariencia completa modificando solo los parámetros de configuración."
+.ITEM "Texto plano portable: Los archivos fuente son texto plano, funcionan en cualquier sistema."
+.ITEM "Control de versiones: Perfecto para usar con Git, SVN u otros sistemas de control de versiones."
+.ITEM "Automatización: Ideal para generar documentos automáticamente desde scripts o sistemas."
+.ITEM "Documentos largos: Manejo eficiente de libros, manuales y documentos de cientos de páginas."
+.ITEM "Formato profesional: Produce documentos con calidad tipográfica profesional."
+.ELIST
+
+.CHAP "Conceptos Fundamentales"
+
+.P
+Antes de comenzar a crear documentos, es esencial entender los conceptos fundamentales que rigen el funcionamiento de STROFF. Estos conceptos le ayudarán a comprender por qué el sistema funciona de cierta manera y cómo aprovechar al máximo sus capacidades.
+
+.SUBCHAP "Directivas y Comandos"
+
+.P
+En STROFF, todas las instrucciones de formateo se llaman "directivas" o "comandos". Estos siempre comienzan con un punto (.) al inicio de una línea y van seguidos del nombre del comando y sus parámetros. Por ejemplo:
+
+.CODE
+.PAGEWIDTH 80
+.TITLE "Mi Documento"
+.CHAP "Introducción"
+.ECODE
+
+.P
+Es crucial entender que las directivas no aparecen en la salida final; son instrucciones para el procesador STROFF. Solo el texto normal (las líneas que no comienzan con punto) aparece en el documento final, formateado según las directivas que las rodean.
+
+.SUBCHAP "Estructura Jerárquica"
+
+.P
+Los documentos STROFF siguen una estructura jerárquica clara y predefinida:
+
+.LIST TYPE=NUMBER INDENT=6
+.ITEM "Configuración global: Parámetros que afectan todo el documento."
+.ITEM "Inicio del documento: La directiva .DOCUMENT que marca el comienzo real del contenido."
+.ITEM "Contenido estructurado: Capítulos, secciones y párrafos organizados jerárquicamente."
+.ITEM "Cierre del documento: La directiva .EDOC que marca el final."
+.ELIST
+
+.P
+Esta estructura no es opcional; STROFF requiere que siga este orden para funcionar correctamente. Los parámetros globales deben definirse antes de .DOCUMENT, los capítulos deben declararse antes de usarse en índices, etc.
+
+.SUBCHAP "Sistema de Dos Pasadas"
+
+.P
+STROFF utiliza un sistema de procesamiento de dos pasadas, similar a LaTeX y otros sistemas avanzados. Esto significa que procesa su documento dos veces:
+
+.P
+Primera pasada: Lee todo el documento y recolecta información sobre capítulos, secciones, tablas y referencias. Esta información se almacena internamente para usar en la segunda pasada.
+
+.P
+Segunda pasada: Genera la salida final utilizando la información recolectada en la primera pasada. Esto permite generar tablas de contenido correctas, referencias cruzadas exactas y numeración de páginas precisa.
+
+.P
+Como usuario, esto es transparente; simplemente ejecuta el comando stroff una vez y el sistema maneja automáticamente ambas pasadas. Sin embargo, es importante entender este proceso porque explica por qué algunas funciones (como .MAKETOC) requieren que los capítulos estén definidos en el documento para funcionar correctamente.
+
+.CHAP "Configuración Básica"
+
+.P
+Antes de crear contenido, debe configurar los parámetros básicos de su documento. Esta configuración determina cómo se verá y comportará todo el documento. Es recomendable dedicar tiempo a planificar esta configuración, ya que cambiarla después puede requerir ajustes en el contenido.
+
+.SUBCHAP "Información del Documento"
+
+.P
+Los parámetros de identificación del documento establecen la información básica que aparecerá en la portada y puede ser referenciada en headers y footers:
+
+.TABLE COLS=3 WIDTHS=20,30,25 ALIGNS=L,L,L NAME="Parámetros de Identificación"
+.TH "Comando" "Descripción" "Ejemplo"
+.TR ".TITLE \"texto\"" "Título principal del documento" ".TITLE \"Manual de Usuario\""
+.TR ".AUTH \"texto\"" "Nombre del autor o autores" ".AUTH \"Juan Pérez\""
+.TR ".DATE \"texto\"" "Fecha de creación o versión" ".DATE \"2025-09-25\""
+.ETABLE
+
+.P
+Estos parámetros son opcionales, pero altamente recomendados. El título se mostrará centrado en la portada automática, y todos estos valores pueden ser referenciados en headers y footers usando variables como {TITLE}.
+
+.SUBCHAP "Configuración de Página"
+
+.P
+Los parámetros de página controlan las dimensiones físicas y el layout básico de todas las páginas del documento:
+
+.TABLE COLS=3 WIDTHS=20,30,25 ALIGNS=L,L,L NAME="Parámetros de Página"
+.TH "Comando" "Descripción" "Ejemplo"
+.TR ".PAGEWIDTH n" "Ancho total en caracteres" ".PAGEWIDTH 80"
+.TR ".PAGEHEIGHT n" "Alto en líneas (0=sin paginación)" ".PAGEHEIGHT 24"
+.TR ".LMARGIN n" "Margen izquierdo en espacios" ".LMARGIN 4"
+.TR ".RMARGIN n" "Margen derecho en espacios" ".RMARGIN 4"
+.ETABLE
+
+.P
+El ancho efectivo de texto será PAGEWIDTH menos LMARGIN menos RMARGIN. Por ejemplo, con PAGEWIDTH 80, LMARGIN 4 y RMARGIN 4, tendrá 72 caracteres disponibles para texto en cada línea.
+
+.P
+PAGEHEIGHT controla la paginación automática. Si establece PAGEHEIGHT 24, STROFF insertará automáticamente saltos de página cada 24 líneas. Si usa PAGEHEIGHT 0, desactiva la paginación automática y el documento será continuo.
+
+.SUBCHAP "Formato de Texto"
+
+.P
+Estos parámetros controlan cómo se formatea y justifica el texto en todo el documento:
+
+.TABLE COLS=3 WIDTHS=20,30,25 ALIGNS=L,L,L NAME="Parámetros de Formato"
+.TH "Comando" "Descripción" "Ejemplo"
+.TR ".INDENT n" "Sangría de párrafos en espacios" ".INDENT 4"
+.TR ".TABSIZE n" "Tamaño de tabulación" ".TABSIZE 4"
+.TR ".JUSTIFY modo" "Justificación global" ".JUSTIFY FULL"
+.TR ".LINESPACE n" "Interlineado (1=simple, 2=doble)" ".LINESPACE 1"
+.ETABLE
+
+.P
+INDENT es particularmente importante entender: sangra solo la primera línea de cada párrafo, no todas las líneas. Esto crea el formato tradicional de párrafos donde la primera línea está indentada pero el resto mantiene el margen normal.
+
+.P
+JUSTIFY controla cómo se alinea el texto. Las opciones son:
+
+.LIST TYPE=BULLET CHAR=• INDENT=4
+.ITEM "LEFT: Alineación a la izquierda (default)"
+.ITEM "RIGHT: Alineación a la derecha"
+.ITEM "CENTER: Texto centrado"
+.ITEM "FULL: Justificación completa con espaciado uniforme"
+.ELIST
+
+.SUBCHAP "Headers y Footers"
+
+.P
+Los headers (cabeceras) y footers (pies de página) aparecen en la parte superior e inferior de cada página respectivamente. Son especialmente útiles para mostrar información de contexto como el título del documento, capítulo actual y numeración de páginas:
+
+.TABLE COLS=3 WIDTHS=20,30,25 ALIGNS=L,L,L NAME="Parámetros de Headers y Footers"
+.TH "Comando" "Descripción" "Ejemplo"
+.TR ".HEADER \"texto\"" "Texto de cabecera" ".HEADER \"Mi Manual\""
+.TR ".HEADALIGN modo" "Alineación de cabecera" ".HEADALIGN CENTER"
+.TR ".FOOTER \"texto\"" "Texto de pie de página" ".FOOTER \"Página {PAGE}\""
+.TR ".FOOTALIGN modo" "Alineación de pie" ".FOOTALIGN RIGHT"
+.ETABLE
+
+.P
+Los headers y footers admiten variables especiales que se sustituyen automáticamente:
+
+.LIST TYPE=BULLET CHAR=→ INDENT=4
+.ITEM "{TITLE}: Título del documento"
+.ITEM "{CHAPTITLE}: Título del capítulo actual"
+.ITEM "{SUBCHAP}: Título del subcapítulo actual"
+.ITEM "{SUBSUBCHAP}: Título del sub-subcapítulo actual"
+.ITEM "{PAGE}: Número de página actual"
+.ITEM "{PAGES}: Total de páginas del documento"
+.ELIST
+
+.P
+Un detalle importante: los headers solo aparecen en páginas de capítulos, no en la página de título ni en páginas de índices. Esto evita contaminación visual en páginas especiales y mantiene un formato profesional.
+
+.CHAP "Estructura del Documento"
+
+.P
+Una vez configurados los parámetros básicos, debe estructurar su documento siguiendo el formato requerido por STROFF. Esta estructura no es negociable; es la forma en que STROFF organiza internamente la información para producir salida consistente y profesional.
+
+.SUBCHAP "Inicio y Fin del Documento"
+
+.P
+Todo documento STROFF debe comenzar con .DOCUMENT y terminar con .EDOC:
+
+.CODE
+# Configuración de parámetros
+.TITLE "Mi Documento"
+.PAGEWIDTH 80
+# ... más parámetros ...
+
+.DOCUMENT
+# Aquí va todo el contenido
+.EDOC
+.ECODE
+
+.P
+La directiva .DOCUMENT hace varias cosas importantes:
+
+.LIST TYPE=NUMBER INDENT=6
+.ITEM "Marca el inicio oficial del contenido procesable"
+.ITEM "Genera automáticamente la página de título si hay información configurada"
+.ITEM "Inicializa el sistema de paginación si está activado"
+.ITEM "Prepara el contexto para procesar capítulos y secciones"
+.ELIST
+
+.P
+La directiva .EDOC cierra el documento y realiza tareas de finalización:
+
+.LIST TYPE=NUMBER INDENT=6
+.ITEM "Completa la última página con líneas vacías si es necesario"
+.ITEM "Agrega el footer final si está configurado"
+.ITEM "Libera recursos internos del procesador"
+.ELIST
+
+.SUBCHAP "Capítulos y Secciones"
+
+.P
+STROFF soporta una jerarquía de tres niveles para organizar el contenido: capítulos, subcapítulos y sub-subcapítulos. Esta estructura jerárquica es fundamental para generar tablas de contenido y para la navegación lógica del documento.
+
+.TABLE COLS=3 WIDTHS=20,25,30 ALIGNS=L,L,L NAME="Comandos de Estructura"
+.TH "Comando" "Nivel" "Descripción"
+.TR ".CHAP \"título\"" "1 (principal)" "Capítulo principal con línea de separación"
+.TR ".SUBCHAP \"título\"" "2 (secundario)" "Subcapítulo con formato menor"
+.TR ".SUBSUBCHAP \"título\"" "3 (terciario)" "Sub-subcapítulo simple"
+.ETABLE
+
+.P
+Cada comando de capítulo hace lo siguiente automáticamente:
+
+.LIST TYPE=BULLET CHAR=▸ INDENT=4
+.ITEM "Registra el título en el sistema para uso en tablas de contenido"
+.ITEM "Actualiza las variables de contexto para headers/footers"
+.ITEM "Aplica el formato visual apropiado (subrayado, espaciado, etc.)"
+.ITEM "Registra la página actual para referencias en índices"
+.ELIST
+
+.P
+Es importante usar estos comandos en orden lógico. No debe saltar niveles (por ejemplo, usar .SUBSUBCHAP sin un .SUBCHAP padre), aunque STROFF no lo prohíbe explícitamente.
+
+.P
+Para cerrar secciones explícitamente, use:
+
+.TABLE COLS=2 WIDTHS=25,45 ALIGNS=L,L NAME="Comandos de Cierre"
+.TH "Comando" "Función"
+.TR ".ECHAP" "Cierra el capítulo actual"
+.TR ".ESCHAP" "Cierra el subcapítulo actual"
+.TR ".ESSCHAP" "Cierra el sub-subcapítulo actual"
+.ETABLE
+
+.SUBCHAP "Generación de Índices"
+
+.P
+Una de las características más potentes de STROFF es la generación automática de índices. Esto se logra mediante el sistema de dos pasadas que recolecta información en la primera pasada y la utiliza para generar índices precisos en la segunda.
+
+.TABLE COLS=2 WIDTHS=20,50 ALIGNS=L,L NAME="Comandos de Índices"
+.TH "Comando" "Descripción"
+.TR ".MAKETOC" "Genera tabla de contenidos completa con capítulos y secciones"
+.TR ".MAKETOT" "Genera índice de tablas con nombres y números de página"
+.ETABLE
+
+.P
+La tabla de contenidos (.MAKETOC) incluye automáticamente todos los capítulos, subcapítulos y sub-subcapítulos definidos en el documento, con su numeración de página correcta y indentación apropiada según su nivel jerárquico.
+
+.P
+El índice de tablas (.MAKETOT) incluye todas las tablas que tengan el parámetro NAME definido. Es útil para documentos técnicos con muchas tablas de datos.
+
+.P
+Ambos índices utilizan "dot leaders" (líneas de puntos) para conectar visualmente los títulos con los números de página, y los números están perfectamente alineados en una columna fija para lograr una apariencia profesional.
+
+.CHAP "Párrafos y Formato de Texto"
+
+.P
+El manejo de párrafos y el formateo de texto son aspectos centrales de STROFF. El sistema implementa algoritmos sofisticados de justificación y text wrapping que automatizan la mayor parte del trabajo de formateo, permitiendo que se concentre en el contenido.
+
+.SUBCHAP "Creación y Manejo de Párrafos"
+
+.P
+Los párrafos en STROFF se crean usando la directiva .P, que puede usarse con o sin parámetros de alineación específicos:
+
+.CODE
+.P
+Este es un párrafo normal que usa la justificación global
+definida por el parámetro .JUSTIFY.
+
+.P LEFT
+Este párrafo específicamente usa alineación izquierda,
+independientemente de la configuración global.
+
+.P FULL
+Este párrafo específicamente usa justificación completa.
+.ECODE
+
+.P
+Entender cómo funciona la indentación es crucial: STROFF sangra únicamente la primera línea de cada párrafo según el valor definido en .INDENT. Las líneas subsiguientes del mismo párrafo mantienen solo el margen izquierdo normal. Esto crea el formato tradicional de párrafos que facilita la lectura al marcar claramente el inicio de cada nueva idea o sección.
+
+.P
+El text wrapping (división automática de líneas) funciona a nivel de palabras completas. STROFF nunca divide una palabra en mitad de línea; siempre mueve la palabra completa a la siguiente línea si no cabe. Esto mantiene la legibilidad pero puede ocasionar líneas ligeramente más cortas en algunos casos.
+
+.SUBCHAP "Justificación y Alineación"
+
+.P
+STROFF ofrece cuatro modos de alineación de texto, cada uno apropiado para diferentes situaciones:
+
+.LIST TYPE=BULLET CHAR=◆ INDENT=6
+.ITEM "LEFT: Texto alineado a la izquierda con borde derecho irregular. Ideal para la mayoría de textos informales."
+.ITEM "RIGHT: Texto alineado a la derecha con borde izquierdo irregular. Útil para efectos especiales o datos numéricos."
+.ITEM "CENTER: Texto centrado en cada línea. Apropiado para títulos, citas destacadas o elementos decorativos."
+.ITEM "FULL: Justificación completa con distribución uniforme de espacios. Produce apariencia profesional similar a libros impresos."
+.ELIST
+
+.P
+La justificación completa (FULL) es particularmente sofisticada. STROFF calcula automáticamente cuánto espacio adicional necesita distribuir en cada línea y lo reparte uniformemente entre las palabras. La última línea de cada párrafo justificado se mantiene alineada a la izquierda para evitar espaciado excesivo.
+
+.P
+El algoritmo de justificación también considera el ancho efectivo disponible, que cambia entre la primera línea (que tiene indentación) y las líneas subsiguientes del mismo párrafo.
+
+.SUBCHAP "Control Avanzado de Líneas"
+
+.P
+Para situaciones donde necesita control más fino sobre el formato, STROFF proporciona directivas adicionales:
+
+.TABLE COLS=2 WIDTHS=25,45 ALIGNS=L,L NAME="Comandos de Control de Líneas"
+.TH "Comando" "Función"
+.TR ".BREAK" "Inserta un salto de línea manual dentro de un párrafo"
+.TR ".LINESPACE n" "Cambia el interlineado (1=simple, 2=doble, etc.)"
+.ETABLE
+
+.P
+.BREAK es útil para crear saltos de línea específicos dentro de un párrafo sin iniciar un nuevo párrafo. Por ejemplo, en poesía, direcciones o listas donde quiere mantener la cohesión del párrafo pero controlar dónde terminan las líneas.
+
+.P
+.LINESPACE controla el espaciado vertical entre líneas. Un valor de 1 produce interlineado simple, 2 produce doble espacio, etc. Este comando afecta solo a los párrafos creados después de su uso.
+
+.CHAP "Listas y Enumeraciones"
+
+.P
+Las listas son elementos fundamentales para organizar información de manera clara y estructurada. STROFF ofrece un sistema completo de listas que maneja automáticamente la numeración, indentación y formato visual.
+
+.SUBCHAP "Sintaxis Básica de Listas"
+
+.P
+Todas las listas en STROFF siguen el mismo patrón básico: inicio (.LIST), elementos (.ITEM) y cierre (.ELIST):
+
+.CODE
+.LIST TYPE=tipo INDENT=espacios CHAR=carácter
+.ITEM "Primer elemento de la lista"
+.ITEM "Segundo elemento de la lista"
+.ITEM "Tercer elemento de la lista"
+.ELIST
+.ECODE
+
+.P
+Los parámetros de .LIST controlan la apariencia y comportamiento de toda la lista:
+
+.LIST TYPE=BULLET CHAR=• INDENT=4
+.ITEM "TYPE: Define el tipo de lista (BULLET, NUMBER, RNUMBER)"
+.ITEM "INDENT: Número de espacios de indentación desde el margen izquierdo"
+.ITEM "CHAR: Carácter específico para listas de viñetas"
+.ELIST
+
+.SUBCHAP "Tipos de Listas Disponibles"
+
+.P
+STROFF soporta tres tipos principales de listas, cada uno apropiado para diferentes contextos:
+
+.SUBSUBCHAP "Listas con Viñetas (BULLET)"
+
+.P
+Las listas con viñetas usan un carácter específico para marcar cada elemento. Son ideales para elementos donde el orden no es importante:
+
+.CODE
+.LIST TYPE=BULLET CHAR=* INDENT=4
+.ITEM "Elemento marcado con asterisco"
+.ITEM "Otro elemento con asterisco"
+.ELIST
+.ECODE
+
+.P
+Produce:
+.LIST TYPE=BULLET CHAR=* INDENT=4
+.ITEM "Elemento marcado con asterisco"
+.ITEM "Otro elemento con asterisco"
+.ELIST
+
+.P
+Puede usar diferentes caracteres como *, -, •, →, ▸, etc., según el efecto visual deseado.
+
+.SUBSUBCHAP "Listas Numeradas (NUMBER)"
+
+.P
+Las listas numeradas usan números secuenciales automáticos. Son perfectas para instrucciones paso a paso, procedimientos o cualquier contenido donde el orden es importante:
+
+.CODE
+.LIST TYPE=NUMBER INDENT=6
+.ITEM "Primer paso del procedimiento"
+.ITEM "Segundo paso del procedimiento"
+.ITEM "Tercer paso del procedimiento"
+.ELIST
+.ECODE
+
+.P
+Produce:
+.LIST TYPE=NUMBER INDENT=6
+.ITEM "Primer paso del procedimiento"
+.ITEM "Segundo paso del procedimiento"
+.ITEM "Tercer paso del procedimiento"
+.ELIST
+
+.SUBSUBCHAP "Listas con Números Romanos (RNUMBER)"
+
+.P
+Las listas con números romanos proporcionan una numeración más formal, apropiada para documentos académicos o legales:
+
+.CODE
+.LIST TYPE=RNUMBER INDENT=6
+.ITEM "Primer punto principal"
+.ITEM "Segundo punto principal"
+.ITEM "Tercer punto principal"
+.ELIST
+.ECODE
+
+.P
+Produce:
+.LIST TYPE=RNUMBER INDENT=6
+.ITEM "Primer punto principal"
+.ITEM "Segundo punto principal"
+.ITEM "Tercer punto principal"
+.ELIST
+
+.SUBCHAP "Anidación y Listas Complejas"
+
+.P
+Aunque STROFF no soporta anidación automática de listas, puede crear efectos similares usando diferentes niveles de indentación y combinando tipos de listas:
+
+.CODE
+.LIST TYPE=NUMBER INDENT=4
+.ITEM "Punto principal uno"
+.ELIST
+
+.LIST TYPE=BULLET CHAR=- INDENT=8
+.ITEM "Sub-punto con más indentación"
+.ITEM "Otro sub-punto"
+.ELIST
+
+.LIST TYPE=NUMBER INDENT=4
+.ITEM "Punto principal dos"
+.ELIST
+.ECODE
+
+.P
+Este enfoque requiere más trabajo manual pero ofrece control completo sobre la apariencia final.
+
+.CHAP "Tablas y Datos Estructurados"
+
+.P
+Las tablas son elementos esenciales para presentar datos estructurados de manera clara y profesional. STROFF implementa un sistema completo de tablas que maneja automáticamente el formateo, alineación y presentación visual.
+
+.SUBCHAP "Sintaxis Básica de Tablas"
+
+.P
+Las tablas siguen una estructura clara: definición (.TABLE), headers opcionales (.TH), filas de datos (.TR) y cierre (.ETABLE):
+
+.CODE
+.TABLE COLS=3 WIDTHS=20,15,25 ALIGNS=L,C,R NAME="Mi Tabla"
+.TH "Encabezado 1" "Encabezado 2" "Encabezado 3"
+.TR "Datos 1" "Datos 2" "Datos 3"
+.TR "Más datos" "Centro" "Derecha"
+.ETABLE
+.ECODE
+
+.SUBCHAP "Parámetros de Configuración"
+
+.P
+La directiva .TABLE acepta varios parámetros que controlan la estructura y apariencia de la tabla:
+
+.TABLE COLS=3 WIDTHS=15,25,35 ALIGNS=L,L,L NAME="Parámetros de Tabla"
+.TH "Parámetro" "Descripción" "Ejemplo"
+.TR "COLS=n" "Número de columnas (requerido)" "COLS=3"
+.TR "WIDTHS=n1,n2,n3" "Anchos de columnas en caracteres" "WIDTHS=20,15,25"
+.TR "ALIGNS=L,C,R" "Alineaciones por columna" "ALIGNS=L,C,R"
+.TR "NAME=\"texto\"" "Nombre para índice de tablas" "NAME=\"Datos Ventas\""
+.ETABLE
+
+.P
+COLS es obligatorio y debe coincidir con el número de columnas que proporcione en las filas. WIDTHS especifica el ancho de cada columna; si no se proporciona, STROFF distribuye el espacio disponible uniformemente.
+
+.P
+ALIGNS controla la alineación del contenido en cada columna:
+.LIST TYPE=BULLET CHAR=→ INDENT=4
+.ITEM "L: Alineación a la izquierda (apropiada para texto)"
+.ITEM "C: Centrado (apropiado para headers o datos cortos)"
+.ITEM "R: Alineación a la derecha (apropiada para números)"
+.ELIST
+
+.SUBCHAP "Elementos de Tabla"
+
+.P
+Las tablas pueden contener dos tipos de filas:
+
+.TABLE COLS=2 WIDTHS=15,55 ALIGNS=L,L NAME="Elementos de Tabla"
+.TH "Comando" "Descripción"
+.TR ".TH" "Fila de encabezados con formato destacado"
+.TR ".TR" "Fila regular de datos"
+.ETABLE
+
+.P
+Las filas de encabezado (.TH) se formatean automáticamente con bordes superior e inferior para distinguirlas visualmente del contenido regular. Las filas regulares (.TR) contienen los datos normales de la tabla.
+
+.P
+Cada fila debe contener exactamente el número de elementos especificado en COLS. Los elementos se separan por espacios y deben estar entre comillas si contienen espacios internos.
+
+.SUBCHAP "Formato Visual Automático"
+
+.P
+STROFF genera automáticamente bordes y separadores para las tablas usando caracteres ASCII:
+
+.LIST TYPE=BULLET CHAR=▪ INDENT=4
+.ITEM "Bordes verticales: | (pipe) para separar columnas"
+.ITEM "Bordes horizontales: - (guión) para separar filas"
+.ITEM "Intersecciones: + (plus) en los cruces de líneas"
+.ITEM "Padding interno: Espacios automáticos para alineación"
+.ELIST
+
+.P
+El resultado es una tabla profesional y legible que se adapta automáticamente a los anchos especificados y mantiene la alineación correcta independientemente del contenido.
+
+.CHAP "Bloques de Código y Texto Literal"
+
+.P
+Para documentación técnica, manuales de programación y cualquier situación donde necesite mostrar texto exactamente como está escrito, STROFF proporciona bloques de código que preservan el formato original.
+
+.SUBCHAP "Sintaxis de Bloques de Código"
+
+.P
+Los bloques de código se delimitan con .CODE y .ECODE:
+
+.CODE
+.CODE
+función ejemplo(parámetro) {
+    si (parámetro > 0) {
+        retornar "positivo";
+    } sino {
+        retornar "no positivo";
+    }
+}
+.ECODE
+.ECODE
+
+.SUBCHAP "Características de los Bloques de Código"
+
+.P
+Los bloques de código tienen comportamiento especial:
+
+.LIST TYPE=NUMBER INDENT=4
+.ITEM "Preservación exacta: Todo el espaciado, tabulaciones y formato se mantiene intacto."
+.ITEM "Sin justificación: No se aplica text wrapping ni justificación al contenido."
+.ITEM "Respeto de márgenes: Se mantienen los márgenes izquierdo y derecho configurados."
+.ITEM "Font monoespacio implícito: El contenido se asume en fuente de ancho fijo."
+.ELIST
+
+.P
+Esto los hace ideales para código fuente, configuraciones, diagramas ASCII, o cualquier texto donde la disposición exacta sea importante.
+
+.CHAP "Funciones Avanzadas"
+
+.P
+STROFF incluye varias características avanzadas que facilitan la creación de documentos complejos y la automatización de tareas de documentación.
+
+.SUBCHAP "Variables en Headers y Footers"
+
+.P
+Las variables dinámicas en headers y footers se actualizan automáticamente conforme el documento se procesa:
+
+.TABLE COLS=2 WIDTHS=20,50 ALIGNS=L,L NAME="Variables Dinámicas"
+.TH "Variable" "Contenido"
+.TR "{TITLE}" "Título del documento según .TITLE"
+.TR "{CHAPTITLE}" "Título del capítulo actual"
+.TR "{SUBCHAP}" "Título del subcapítulo actual"
+.TR "{SUBSUBCHAP}" "Título del sub-subcapítulo actual"
+.TR "{PAGE}" "Número de página actual"
+.TR "{PAGES}" "Total de páginas (disponible en segunda pasada)"
+.ETABLE
+
+.P
+Estas variables permiten crear headers y footers dinámicos que se adaptan automáticamente al contenido actual, manteniendo el contexto apropiado en cada página.
+
+.SUBCHAP "Control de Paginación"
+
+.P
+Además de la paginación automática, STROFF ofrece control manual:
+
+.TABLE COLS=2 WIDTHS=20,50 ALIGNS=L,L NAME="Comandos de Paginación"
+.TH "Comando" "Función"
+.TR ".PAGEBREAK" "Fuerza un salto de página inmediato"
+.ETABLE
+
+.P
+Los saltos de página manuales son útiles para controlar exactamente dónde terminan las secciones, asegurar que tablas grandes aparezcan completas en una página, o crear páginas especiales como portadas de capítulos.
+
+.CHAP "Flujo de Trabajo y Mejores Prácticas"
+
+.P
+Para aprovechar al máximo STROFF, es importante establecer un flujo de trabajo eficiente y seguir las mejores prácticas desarrolladas por la experiencia.
+
+.SUBCHAP "Organización del Documento"
+
+.P
+Estructure sus documentos STROFF de manera lógica y consistente:
+
+.LIST TYPE=NUMBER INDENT=4
+.ITEM "Configuración al inicio: Defina todos los parámetros globales antes de .DOCUMENT."
+.ITEM "Comentarios abundantes: Use líneas que comienzan con # para documentar su configuración."
+.ITEM "Secciones claras: Separe visualmente las diferentes partes de su documento fuente."
+.ITEM "Nombres descriptivos: Use nombres de archivo descriptivos que indiquen el contenido."
+.ELIST
+
+.SUBCHAP "Control de Versiones"
+
+.P
+Los documentos STROFF son perfectos para control de versiones:
+
+.LIST TYPE=BULLET CHAR=✓ INDENT=4
+.ITEM "Use Git o sistemas similares para versionar sus documentos fuente .TRF"
+.ITEM "Incluya la salida .TXT en el repositorio para referencias rápidas"
+.ITEM "Documente cambios importantes en commits descriptivos"
+.ITEM "Use branches para experimentos de formato sin afectar la versión principal"
+.ELIST
+
+.SUBCHAP "Automatización y Scripts"
+
+.P
+STROFF se integra perfectamente en sistemas automatizados:
+
+.CODE
+#!/bin/bash
+# Script de generación automática de documentos
+for archivo in *.TRF; do
+    salida="${archivo%.TRF}.TXT"
+    echo "Procesando $archivo -> $salida"
+    ./stroff "$archivo" "$salida"
+done
+.ECODE
+
+.CHAP "Solución de Problemas Comunes"
+
+.P
+Esta sección aborda los problemas más frecuentes que pueden surgir al usar STROFF y proporciona soluciones prácticas.
+
+.SUBCHAP "Problemas de Formato"
+
+.TABLE COLS=2 WIDTHS=35,35 ALIGNS=L,L NAME="Problemas y Soluciones"
+.TH "Problema" "Solución"
+.TR "Texto se corta en tablas" "Aumentar valores en WIDTHS o reducir contenido"
+.TR "Márgenes incorrectos" "Verificar que LMARGIN + RMARGIN < PAGEWIDTH"
+.TR "Indentación no funciona" "Asegurar que .P precede al texto del párrafo"
+.TR "Headers no aparecen" "Los headers solo se muestran en páginas de capítulos"
+.ETABLE
+
+.SUBCHAP "Errores de Sintaxis"
+
+.P
+Los errores más comunes incluyen:
+
+.LIST TYPE=BULLET CHAR=⚠ INDENT=4
+.ITEM "Olvidar comillas en parámetros de texto: .TITLE Mi Documento (incorrecto) vs .TITLE \"Mi Documento\" (correcto)"
+.ITEM "Comandos mal escritos: .CHAP vs .CHAPTER (solo .CHAP es válido)"
+.ITEM "Estructura incorrecta: contenido antes de .DOCUMENT"
+.ITEM "Parámetros faltantes: .TABLE sin especificar COLS"
+.ELIST
+
+.SUBCHAP "Problemas de Rendimiento"
+
+.P
+Para documentos muy grandes:
+
+.LIST TYPE=NUMBER INDENT=4
+.ITEM "Divida documentos extremadamente largos en múltiples archivos"
+.ITEM "Limite el número de tablas complejas por página"
+.ITEM "Use .PAGEBREAK estratégicamente para controlar la memoria"
+.ITEM "Evite listas con cientos de elementos"
+.ELIST
+
+.CHAP "Referencia Rápida"
+
+.P
+Esta sección proporciona una referencia condensada de todos los comandos STROFF para consulta rápida.
+
+.SUBCHAP "Configuración Global"
+
+.TABLE COLS=2 WIDTHS=25,45 ALIGNS=L,L NAME="Comandos de Configuración"
+.TH "Comando" "Descripción"
+.TR ".TITLE \"texto\"" "Título del documento"
+.TR ".AUTH \"texto\"" "Autor del documento"
+.TR ".DATE \"texto\"" "Fecha del documento"
+.TR ".PAGEWIDTH n" "Ancho de página en caracteres"
+.TR ".PAGEHEIGHT n" "Alto de página en líneas"
+.TR ".LMARGIN n" "Margen izquierdo"
+.TR ".RMARGIN n" "Margen derecho"
+.TR ".INDENT n" "Indentación de párrafos"
+.TR ".JUSTIFY modo" "LEFT, RIGHT, CENTER, FULL"
+.TR ".HEADER \"texto\"" "Cabecera de página"
+.TR ".FOOTER \"texto\"" "Pie de página"
+.ETABLE
+
+.SUBCHAP "Estructura"
+
+.TABLE COLS=2 WIDTHS=25,45 ALIGNS=L,L NAME="Comandos de Estructura"
+.TH "Comando" "Descripción"
+.TR ".DOCUMENT" "Inicia el documento"
+.TR ".EDOC" "Finaliza el documento"
+.TR ".CHAP \"título\"" "Capítulo principal"
+.TR ".SUBCHAP \"título\"" "Subcapítulo"
+.TR ".SUBSUBCHAP \"título\"" "Sub-subcapítulo"
+.TR ".MAKETOC" "Tabla de contenidos"
+.TR ".MAKETOT" "Índice de tablas"
+.TR ".PAGEBREAK" "Salto de página"
+.ETABLE
+
+.SUBCHAP "Contenido"
+
+.TABLE COLS=2 WIDTHS=25,45 ALIGNS=L,L NAME="Comandos de Contenido"
+.TH "Comando" "Descripción"
+.TR ".P [alineación]" "Nuevo párrafo"
+.TR ".BREAK" "Salto de línea"
+.TR ".CODE" "Inicia bloque de código"
+.TR ".ECODE" "Termina bloque de código"
+.TR ".LIST parámetros" "Inicia lista"
+.TR ".ITEM \"texto\"" "Elemento de lista"
+.TR ".ELIST" "Termina lista"
+.TR ".TABLE parámetros" "Inicia tabla"
+.TR ".TH elementos" "Fila de encabezados"
+.TR ".TR elementos" "Fila de datos"
+.TR ".ETABLE" "Termina tabla"
+.ETABLE
+
+.CHAP "Conclusión"
+
+.P
+STROFF representa una herramienta poderosa y versátil para la creación de documentos formateados de alta calidad. Su enfoque de separación entre contenido y presentación, combinado con capacidades avanzadas como justificación automática, paginación inteligente y generación de índices, lo convierte en una opción excelente para documentación profesional.
+
+.P
+La curva de aprendizaje inicial puede parecer empinada para usuarios acostumbrados a procesadores WYSIWYG, pero la inversión en tiempo se compensa rápidamente con la consistencia, control y calidad de los resultados obtenidos. Además, la naturaleza de texto plano de los documentos fuente garantiza compatibilidad a largo plazo y facilita la integración con sistemas de control de versiones y flujos de trabajo automatizados.
+
+.P
+Para dominar completamente STROFF, practique con documentos pequeños antes de abordar proyectos grandes, experimente con diferentes configuraciones para entender su impacto, y no dude en consultar esta documentación como referencia durante su trabajo.
+
+.P
+El futuro de STROFF continuará evolucionando para adaptarse a las necesidades cambiantes de la documentación técnica, manteniendo siempre el equilibrio entre potencia y simplicidad que caracteriza a los mejores sistemas de formateo de texto.
+
+# ============================
+# FIN DEL DOCUMENTO
+# ============================
+.EDOC
