@@ -184,12 +184,12 @@ Historia y Contexto
         Existen  varias  razones  para elegir STROFF sobre otros sistemas de
     formateo:
 
-        1. Control preciso del formato: Cada aspecto del documento puede
-           controlarse exactamente, desde márgenes hasta interlineado.
-        2. Consistencia garantizada: El formato se mantiene consistente en
-           todo el documento automáticamente.
-        3. Separación contenido-formato: Puede cambiar la apariencia
-           completa modificando solo los parámetros de configuración.
+        1.  Control preciso del formato: Cada aspecto del documento puede
+            controlarse exactamente, desde márgenes hasta interlineado.
+        2.  Consistencia garantizada: El formato se mantiene consistente en
+            todo el documento automáticamente.
+        3.  Separación contenido-formato: Puede cambiar la apariencia
+            completa modificando solo los parámetros de configuración.
 
 
                                 Página 8 de 33
@@ -197,16 +197,16 @@ Historia y Contexto
     Manual Completo de STROFF — Introducción a STROFF
 
 
-        4. Texto plano portable: Los archivos fuente son texto plano,
-           funcionan en cualquier sistema.
-        5. Control de versiones: Perfecto para usar con Git, SVN u otros
-           sistemas de control de versiones.
-        6. Automatización: Ideal para generar documentos automáticamente
-           desde scripts o sistemas.
-        7. Documentos largos: Manejo eficiente de libros, manuales y
-           documentos de cientos de páginas.
-        8. Formato profesional: Produce documentos con calidad tipográfica
-           profesional.
+        4.  Texto plano portable: Los archivos fuente son texto plano,
+            funcionan en cualquier sistema.
+        5.  Control de versiones: Perfecto para usar con Git, SVN u otros
+            sistemas de control de versiones.
+        6.  Automatización: Ideal para generar documentos automáticamente
+            desde scripts o sistemas.
+        7.  Documentos largos: Manejo eficiente de libros, manuales y
+            documentos de cientos de páginas.
+        8.  Formato profesional: Produce documentos con calidad tipográfica
+            profesional.
 
 
 Conceptos Fundamentales
@@ -259,17 +259,17 @@ Estructura Jerárquica
         Los  documentos  STROFF  siguen  una  estructura jerárquica clara y
     predefinida:
 
-        1. Configuración global: Parámetros que afectan todo el documento.
-        2. Inicio del documento: La directiva .DOCUMENT que marca el
-           comienzo real del contenido.
-        3. Contenido estructurado: Capítulos, secciones y párrafos
-           organizados jerárquicamente.
-        4. Cierre del documento: La directiva .EDOC que marca el final.
+        1.  Configuración global: Parámetros que afectan todo el
+            documento.
+        2.  Inicio del documento: La directiva .DOCUMENT que marca el
+            comienzo real del contenido.
+        3.  Contenido estructurado: Capítulos, secciones y párrafos
+            organizados jerárquicamente.
+        4.  Cierre del documento: La directiva .EDOC que marca el final.
 
 
         Esta  estructura no es opcional; STROFF requiere que siga este orden
     para  funcionar  correctamente. Los parámetros globales deben definirse
-    antes  de  .DOCUMENT, los capítulos deben declararse antes de usarse en
 
 
                                 Página 11 de 33
@@ -277,6 +277,7 @@ Estructura Jerárquica
     Mi Documento — Introducción
 
 
+    antes  de  .DOCUMENT, los capítulos deben declararse antes de usarse en
     índices, etc.
 
 Sistema de Dos Pasadas
@@ -294,7 +295,6 @@ Sistema de Dos Pasadas
         Segunda  pasada:  Genera  la salida final utilizando la información
     recolectada  en  la  primera  pasada.  Esto  permite  generar  tablas de
     contenido  correctas,  referencias  cruzadas  exactas  y  numeración de
-    páginas precisa.
 
 
                                 Página 12 de 33
@@ -302,6 +302,7 @@ Sistema de Dos Pasadas
     Mi Documento — Introducción
 
 
+    páginas precisa.
 
         Como  usuario,  esto es transparente; simplemente ejecuta el comando
     stroff  una  vez y el sistema maneja automáticamente ambas pasadas. Sin
@@ -318,7 +319,6 @@ Configuración Básica
     comportará   todo  el  documento.  Es  recomendable  dedicar  tiempo  a
     planificar esta configuración, ya que cambiarla después puede requerir
     ajustes en el contenido.
-
 
 
 
@@ -506,17 +506,17 @@ Inicio y Fin del Documento
 
 
 
-        1. Marca el inicio oficial del contenido procesable
-        2. Genera automáticamente la página de título si hay información
-           configurada
-        3. Inicializa el sistema de paginación si está activado
-        4. Prepara el contexto para procesar capítulos y secciones
+        1.  Marca el inicio oficial del contenido procesable
+        2.  Genera automáticamente la página de título si hay
+            información configurada
+        3.  Inicializa el sistema de paginación si está activado
+        4.  Prepara el contexto para procesar capítulos y secciones
 
 
 
-        1. Completa la última página con líneas vacías si es necesario
-        2. Agrega el footer final si está configurado
-        3. Libera recursos internos del procesador
+        1.  Completa la última página con líneas vacías si es necesario
+        2.  Agrega el footer final si está configurado
+        3.  Libera recursos internos del procesador
 
 
 Capítulos y Secciones
@@ -701,16 +701,16 @@ Listas Numeradas (NUMBER)
 
 
 
-        1. Primer paso del procedimiento
-        2. Segundo paso del procedimiento
-        3. Tercer paso del procedimiento
+        1.  Primer paso del procedimiento
+        2.  Segundo paso del procedimiento
+        3.  Tercer paso del procedimiento
 
 
 
 
-        1. Primer paso del procedimiento
-        2. Segundo paso del procedimiento
-        3. Tercer paso del procedimiento
+        1.  Primer paso del procedimiento
+        2.  Segundo paso del procedimiento
+        3.  Tercer paso del procedimiento
 
 
 Listas con Números Romanos (RNUMBER)
@@ -718,16 +718,16 @@ Listas con Números Romanos (RNUMBER)
 
 
 
-        I. Primer punto principal
-        II. Segundo punto principal
-        III. Tercer punto principal
+        I    Primer punto principal
+        II   Segundo punto principal
+        III  Tercer punto principal
 
 
 
 
-        I. Primer punto principal
-        II. Segundo punto principal
-        III. Tercer punto principal
+        I    Primer punto principal
+        II   Segundo punto principal
+        III  Tercer punto principal
 
 
                                 Página 25 de 33
@@ -743,14 +743,14 @@ Anidación y Listas Complejas
 
 
 
-        1. Punto principal uno
+        1.  Punto principal uno
 
 
         * Sub-punto con más indentación
         * Otro sub-punto
 
 
-        1. Punto principal dos
+        1.  Punto principal dos
 
 
 
@@ -873,10 +873,10 @@ Características de los Bloques de Código
 
 
 
-        1. Preservación exacta: Todo el espaciado, tabulaciones y formato
-           se mantiene intacto.
-        2. Sin justificación: No se aplica text wrapping ni justificación
-           al contenido.
+        1.  Preservación exacta: Todo el espaciado, tabulaciones y formato
+            se mantiene intacto.
+        2.  Sin justificación: No se aplica text wrapping ni justificación
+            al contenido.
 
 
                                 Página 29 de 33
@@ -884,10 +884,10 @@ Características de los Bloques de Código
     Mi Documento — Bloques de Código y Texto Literal
 
 
-        3. Respeto de márgenes: Se mantienen los márgenes izquierdo y
-           derecho configurados.
-        4. Font monoespacio implícito: El contenido se asume en fuente de
-           ancho fijo.
+        3.  Respeto de márgenes: Se mantienen los márgenes izquierdo y
+            derecho configurados.
+        4.  Font monoespacio implícito: El contenido se asume en fuente de
+            ancho fijo.
 
 
 
@@ -939,9 +939,9 @@ Organización del Documento
 
 
 
-        1. Configuración al inicio: Defina todos los parámetros globales
-           antes de .DOCUMENT.
-        2. Comentarios abundantes: Use líneas que comienzan con # para
+        1.  Configuración al inicio: Defina todos los parámetros globales
+            antes de .DOCUMENT.
+        2.  Comentarios abundantes: Use líneas que comienzan con # para
 
 
                                 Página 31 de 33
@@ -949,11 +949,11 @@ Organización del Documento
     Mi Documento — Flujo de Trabajo y Mejores Prácticas
 
 
-           documentar su configuración.
-        3. Secciones claras: Separe visualmente las diferentes partes de su
-           documento fuente.
-        4. Nombres descriptivos: Use nombres de archivo descriptivos que
-           indiquen el contenido.
+            documentar su configuración.
+        3.  Secciones claras: Separe visualmente las diferentes partes de su
+            documento fuente.
+        4.  Nombres descriptivos: Use nombres de archivo descriptivos que
+            indiquen el contenido.
 
 
 Control de Versiones
@@ -1024,10 +1024,10 @@ Problemas de Rendimiento
 
 
 
-        1. Divida documentos extremadamente largos en múltiples archivos
-        2. Limite el número de tablas complejas por página
-        3. Use .PAGEBREAK estratégicamente para controlar la memoria
-        4. Evite listas con cientos de elementos
+        1.  Divida documentos extremadamente largos en múltiples archivos
+        2.  Limite el número de tablas complejas por página
+        3.  Use .PAGEBREAK estratégicamente para controlar la memoria
+        4.  Evite listas con cientos de elementos
 
 
 

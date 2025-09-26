@@ -180,16 +180,16 @@ Why Use STROFF?
         There  are  several  reasons  to choose STROFF over other formatting
     systems:
 
-        1. Precise format control: Every aspect of the document can be
-           controlled exactly, from margins to line spacing.
-        2. Guaranteed consistency: Formatting remains consistent throughout
-           the document automatically.
-        3. Content-format separation: You can change the entire appearance
-           by modifying only configuration parameters.
-        4. Portable plain text: Source files are plain text, work on any
-           system.
-        5. Version control: Perfect for use with Git, SVN, or other version
-           control systems.
+        1.  Precise format control: Every aspect of the document can be
+            controlled exactly, from margins to line spacing.
+        2.  Guaranteed consistency: Formatting remains consistent throughout
+            the document automatically.
+        3.  Content-format separation: You can change the entire appearance
+            by modifying only configuration parameters.
+        4.  Portable plain text: Source files are plain text, work on any
+            system.
+        5.  Version control: Perfect for use with Git, SVN, or other version
+            control systems.
 
 
                                   Page 8 of 30
@@ -197,12 +197,12 @@ Why Use STROFF?
     Complete STROFF Manual — Introduction to STROFF
 
 
-        6. Automation: Ideal for generating documents automatically from
-           scripts or systems.
-        7. Long documents: Efficient handling of books, manuals, and
-           hundreds-page documents.
-        8. Professional format: Produces documents with professional
-           typographic quality.
+        6.  Automation: Ideal for generating documents automatically from
+            scripts or systems.
+        7.  Long documents: Efficient handling of books, manuals, and
+            hundreds-page documents.
+        8.  Professional format: Produces documents with professional
+            typographic quality.
 
 
 Fundamental Concepts
@@ -257,12 +257,13 @@ Hierarchical Structure
         STROFF   documents   follow  a  clear  and  predefined  hierarchical
     structure:
 
-        1. Global configuration: Parameters that affect the entire document.
-        2. Document start: The .DOCUMENT directive that marks the actual
-           beginning of content.
-        3. Structured content: Chapters, sections, and paragraphs organized
-           hierarchically.
-        4. Document close: The .EDOC directive that marks the end.
+        1.  Global configuration: Parameters that affect the entire
+            document.
+        2.  Document start: The .DOCUMENT directive that marks the actual
+            beginning of content.
+        3.  Structured content: Chapters, sections, and paragraphs organized
+            hierarchically.
+        4.  Document close: The .EDOC directive that marks the end.
 
 
         This  structure  is  not  optional;  it's  the  way STROFF organizes
@@ -271,10 +272,10 @@ Hierarchical Structure
     STROFF usage.
 
 
-
                                  Page 11 of 30
 
     My Document — Introduction
+
 
 
 Two-Pass Processing
@@ -284,16 +285,15 @@ Two-Pass Processing
         One  of  STROFF's most important features is its two-pass processing
     system. This means the document is processed twice:
 
-        1. First pass: Collects information about chapters, tables, and
-           calculates total pages.
-        2. Second pass: Generates the final formatted output with all
-           cross-references and correct page numbers.
+        1.  First pass: Collects information about chapters, tables, and
+            calculates total pages.
+        2.  Second pass: Generates the final formatted output with all
+            cross-references and correct page numbers.
 
 
         This  system  allows  advanced  features like table of contents with
     correct   page   numbers,  total  page  count  in  headers/footers,  and
     consistent cross-referencing throughout the document.
-
 
 
 
@@ -487,17 +487,17 @@ Document Start and End
 
 
 
-        1. Marks the official start of processable content
-        2. Automatically generates the title page if information is
-           configured
-        3. Initializes the pagination system if activated
-        4. Prepares the context for processing chapters and sections
+        1.  Marks the official start of processable content
+        2.  Automatically generates the title page if information is
+            configured
+        3.  Initializes the pagination system if activated
+        4.  Prepares the context for processing chapters and sections
 
 
 
-        1. Completes the last page with empty lines if necessary
-        2. Adds the final footer if configured
-        3. Releases internal processor resources
+        1.  Completes the last page with empty lines if necessary
+        2.  Adds the final footer if configured
+        3.  Releases internal processor resources
 
 
 Chapters and Hierarchical Structure
@@ -641,9 +641,9 @@ Numbered Lists
 
 
 
-        1. First numbered item
-        2. Second numbered item
-        3. Third numbered item
+        1.  First numbered item
+        2.  Second numbered item
+        3.  Third numbered item
 
 
 
@@ -661,9 +661,9 @@ Roman Numeral Lists
 
 
 
-        I. First Roman item
-        II. Second Roman item
-        III. Third Roman item
+        I    First Roman item
+        II   Second Roman item
+        III  Third Roman item
 
 
 
@@ -906,10 +906,10 @@ Document Planning
 
 
 
-        1. Define the hierarchical structure (chapters, sections)
-        2. Decide on formatting parameters (page width, margins)
-        3. Plan the use of tables, lists, and special elements
-        4. Consider whether you'll need indexes and cross-references
+        1.  Define the hierarchical structure (chapters, sections)
+        2.  Decide on formatting parameters (page width, margins)
+        3.  Plan the use of tables, lists, and special elements
+        4.  Consider whether you'll need indexes and cross-references
 
 
 
@@ -918,10 +918,10 @@ Development Workflow
 
 
 
-        1. Create the basic structure with parameters and chapters
-        2. Write content focusing on structure over formatting
-        3. Add tables, lists, and special elements as needed
-        4. Configure headers, footers, and indexes
+        1.  Create the basic structure with parameters and chapters
+        2.  Write content focusing on structure over formatting
+        3.  Add tables, lists, and special elements as needed
+        4.  Configure headers, footers, and indexes
 
 
                                  Page 30 of 30
@@ -929,8 +929,8 @@ Development Workflow
     Best Practices and Workflow / Development Workflow / Roman Numeral Lists
 
 
-        5. Review and adjust formatting parameters
-        6. Generate final output and review
+        5.  Review and adjust formatting parameters
+        6.  Generate final output and review
 
 
 Version Control
@@ -967,13 +967,13 @@ Troubleshooting and Common Problems
 
 
 
-        1. Verify that all commands start with a dot and are on their own
-           line
-        2. Check that quotes are properly closed in parameters
-        3. Ensure parameter values are valid (numbers for numeric
-           parameters)
-        4. Verify that the document structure follows the correct hierarchy
-        5. Make sure .DOCUMENT and .EDOC are present and properly placed
+        1.  Verify that all commands start with a dot and are on their own
+            line
+        2.  Check that quotes are properly closed in parameters
+        3.  Ensure parameter values are valid (numbers for numeric
+            parameters)
+        4.  Verify that the document structure follows the correct hierarchy
+        5.  Make sure .DOCUMENT and .EDOC are present and properly placed
 
 
 

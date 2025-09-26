@@ -326,11 +326,19 @@ void process_command(stroff_context_t *ctx, const char *line) {
             if (ctx->current_list.type == LIST_BULLET) {
                 snprintf(prefix, sizeof(prefix), "%c ", ctx->current_list.bullet_char);
             } else if (ctx->current_list.type == LIST_NUMBER) {
-                snprintf(prefix, sizeof(prefix), "%d. ", ctx->current_list.item_count + 1);
+                // Use consistent 3-character width: "1. " becomes "1.  " for single digits
+                int num = ctx->current_list.item_count + 1;
+                if (num < 10) {
+                    snprintf(prefix, sizeof(prefix), "%d.  ", num);
+                } else {
+                    snprintf(prefix, sizeof(prefix), "%d. ", num);
+                }
             } else if (ctx->current_list.type == LIST_RNUMBER) {
-                const char *roman[] = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
-                if (ctx->current_list.item_count < 10) {
-                    snprintf(prefix, sizeof(prefix), "%s. ", roman[ctx->current_list.item_count]);
+                const char *roman[] = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                                      "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"};
+                if (ctx->current_list.item_count < 20) {
+                    // Use consistent 5-character width for Roman numerals
+                    snprintf(prefix, sizeof(prefix), "%-4s ", roman[ctx->current_list.item_count]);
                 }
             }
 
