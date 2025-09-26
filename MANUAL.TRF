@@ -536,12 +536,14 @@ Las tablas pueden contener dos tipos de filas:
 
 .TABLE COLS=2 WIDTHS=15,55 ALIGNS=L,L NAME="Elementos de Tabla"
 .TH "Comando" "Descripción"
+.TLINE
 .TR ".TH" "Fila de encabezados con formato destacado"
 .TR ".TR" "Fila regular de datos"
+.TR ".TLINE" "Línea separadora horizontal"
 .ETABLE
 
 .P
-Las filas de encabezado (.TH) se formatean automáticamente con bordes superior e inferior para distinguirlas visualmente del contenido regular. Las filas regulares (.TR) contienen los datos normales de la tabla.
+Las filas de encabezado (.TH) se formatean como la primera fila de la tabla y se pueden separar visualmente del contenido usando .TLINE. Las filas regulares (.TR) contienen los datos normales de la tabla. Use .TLINE para crear separadores horizontales donde necesite dividir visualmente las secciones de la tabla.
 
 .P
 Cada fila debe contener exactamente el número de elementos especificado en COLS. Los elementos se separan por espacios y deben estar entre comillas si contienen espacios internos.
@@ -549,14 +551,28 @@ Cada fila debe contener exactamente el número de elementos especificado en COLS
 .SUBCHAP "Formato Visual Automático"
 
 .P
-STROFF genera automáticamente bordes y separadores para las tablas usando caracteres ASCII:
+STROFF genera tablas con formato limpio y profesional sin marcos externos. Las características del formato incluyen:
 
 .LIST TYPE=BULLET CHAR=▪ INDENT=4
-.ITEM "Bordes verticales: | (pipe) para separar columnas"
-.ITEM "Bordes horizontales: - (guión) para separar filas"
-.ITEM "Intersecciones: + (plus) en los cruces de líneas"
-.ITEM "Padding interno: Espacios automáticos para alineación"
+.ITEM "Espaciado uniforme entre columnas (2 espacios)"
+.ITEM "Alineación precisa según especificaciones (L, C, R)"
+.ITEM "Headers diferenciados visualmente del contenido"
+.ITEM "Separadores opcionales con la directiva .TLINE"
 .ELIST
+
+.P
+Para crear separadores horizontales dentro de las tablas, use la directiva .TLINE en cualquier punto entre .TH, .TR o antes de .ETABLE:
+
+.CODE
+.TABLE COLS=2 WIDTHS=20,30 ALIGNS=L,R
+.TH "Header 1" "Header 2"
+.TLINE
+.TR "Datos 1" "Valor 1"
+.TR "Datos 2" "Valor 2"
+.TLINE
+.TR "Total" "Suma"
+.ETABLE
+.ECODE
 
 .P
 El resultado es una tabla profesional y legible que se adapta automáticamente a los anchos especificados y mantiene la alineación correcta independientemente del contenido.

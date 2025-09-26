@@ -8,7 +8,7 @@ STROFF is a powerful document formatting system inspired by classic RUNOFF and R
 - **📚 Automatic Indexing**: Generate table of contents and table indexes automatically
 - **🔤 Advanced Typography**: Full text justification with intelligent word wrapping
 - **📑 Smart Pagination**: Automatic page breaks with customizable headers and footers
-- **📋 Rich Content Elements**: Support for tables, lists, code blocks, and hierarchical chapters
+- **📋 Rich Content Elements**: Support for clean tables with optional separators, lists, code blocks, and hierarchical chapters
 - **🔧 Variable Substitution**: Dynamic headers and footers with document variables
 - **📖 Two-Pass Processing**: First pass collects references, second pass generates final output
 
@@ -131,10 +131,15 @@ Your paragraph text here.
 ```
 .TABLE COLS=3 WIDTHS=20,15,25 ALIGNS=L,C,R NAME="Sample Table"
 .TH "Column 1" "Column 2" "Column 3"
+.TLINE
 .TR "Data 1" "Data 2" "Data 3"
 .TR "More data" "Center" "Right"
+.TLINE
+.TR "Total" "Summary" "Result"
 .ETABLE
 ```
+
+Tables use clean formatting without borders. Use `.TLINE` to add horizontal separator lines where needed:
 
 ### Code Blocks
 ```

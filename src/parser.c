@@ -320,22 +320,23 @@ void process_command(stroff_context_t *ctx, const char *line) {
     else if (strcmp(command, "ITEM") == 0) {
         char *item = extract_string_param(line, "ITEM");
         if (item && ctx->current_list.item_count < MAX_LIST_ITEMS) {
-            for (int i = 0; i < ctx->current_list.indent + ctx->params.left_margin; i++) {
-                fprintf(ctx->output, " ");
-            }
+            // Crear el prefijo del item (bullet/número)
+            char prefix[32] = "";
 
             if (ctx->current_list.type == LIST_BULLET) {
-                fprintf(ctx->output, "%c ", ctx->current_list.bullet_char);
+                snprintf(prefix, sizeof(prefix), "%c ", ctx->current_list.bullet_char);
             } else if (ctx->current_list.type == LIST_NUMBER) {
-                fprintf(ctx->output, "%d. ", ctx->current_list.item_count + 1);
+                snprintf(prefix, sizeof(prefix), "%d. ", ctx->current_list.item_count + 1);
             } else if (ctx->current_list.type == LIST_RNUMBER) {
                 const char *roman[] = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
                 if (ctx->current_list.item_count < 10) {
-                    fprintf(ctx->output, "%s. ", roman[ctx->current_list.item_count]);
+                    snprintf(prefix, sizeof(prefix), "%s. ", roman[ctx->current_list.item_count]);
                 }
             }
 
-            fprintf(ctx->output, "%s\n", item);
+            // Usar la función especializada para items de lista
+            output_list_item(ctx, prefix, item);
+
             ctx->current_list.item_count++;
             free(item);
         }
@@ -348,6 +349,12 @@ void process_command(stroff_context_t *ctx, const char *line) {
     else if (strncmp(command, "TABLE", 5) == 0) {
         ctx->current_table.cols = extract_int_param(line, "COLS");
         ctx->current_table.row_count = 0;
+
+        // Inicializar headers como cadenas vacías y TLINE tracking
+        for (int i = 0; i < ctx->current_table.cols; i++) {
+            ctx->current_table.headers[i][0] = '\0';
+        }
+        ctx->current_table.tline_count = 0;
 
         const char *widths_pos = strstr(line, "WIDTHS=");
         if (widths_pos) {
@@ -390,7 +397,7 @@ void process_command(stroff_context_t *ctx, const char *line) {
 
         fprintf(ctx->output, "\n");
     }
-    else if (strcmp(command, "TTITLE") == 0) {
+    else if (strcmp(command, "TH") == 0) {
         const char *quote_start = strchr(line, '"');
         if (quote_start) {
             quote_start++;
@@ -416,17 +423,11 @@ void process_command(stroff_context_t *ctx, const char *line) {
         }
     }
     else if (strcmp(command, "TLINE") == 0) {
-        for (int i = 0; i < ctx->params.left_margin; i++) {
-            fprintf(ctx->output, " ");
+        // Almacenar información de TLINE para renderizar en ETABLE
+        if (ctx->current_table.tline_count < MAX_TABLE_ROWS) {
+            ctx->current_table.tline_after_row[ctx->current_table.tline_count] = ctx->current_table.row_count - 1;
+            ctx->current_table.tline_count++;
         }
-        int total_width = 0;
-        for (int i = 0; i < ctx->current_table.cols; i++) {
-            total_width += ctx->current_table.widths[i] + 3;
-        }
-        for (int i = 0; i < total_width; i++) {
-            fprintf(ctx->output, "-");
-        }
-        fprintf(ctx->output, "\n");
     }
     else if (strcmp(command, "TR") == 0) {
         if (ctx->current_table.row_count < MAX_TABLE_ROWS) {
@@ -457,43 +458,69 @@ void process_command(stroff_context_t *ctx, const char *line) {
         }
     }
     else if (strcmp(command, "ETABLE") == 0) {
-        for (int i = 0; i < ctx->params.left_margin; i++) {
-            fprintf(ctx->output, " ");
-        }
-
+        // Verificar si hay headers definidos
+        int has_headers = 0;
         for (int col = 0; col < ctx->current_table.cols; col++) {
-            fprintf(ctx->output, "| ");
-            int width = ctx->current_table.widths[col];
-            char *header = ctx->current_table.headers[col];
-
-            if (ctx->current_table.aligns[col] == ALIGN_CENTER && width > strlen(header)) {
-                int padding = (width - strlen(header)) / 2;
-                for (int i = 0; i < padding; i++) fprintf(ctx->output, " ");
-                fprintf(ctx->output, "%s", header);
-                int remaining = width - strlen(header) - padding;
-                for (int i = 0; i < remaining && i >= 0; i++) fprintf(ctx->output, " ");
-            } else if (ctx->current_table.aligns[col] == ALIGN_RIGHT && width > strlen(header)) {
-                int spaces = width - strlen(header);
-                for (int i = 0; i < spaces && i >= 0; i++) fprintf(ctx->output, " ");
-                fprintf(ctx->output, "%s", header);
-            } else {
-                fprintf(ctx->output, "%s", header);
-                for (int i = strlen(header); i < width; i++) fprintf(ctx->output, " ");
-            }
-            fprintf(ctx->output, " ");
-        }
-        fprintf(ctx->output, "|\n");
-
-        for (int i = 0; i < ctx->params.left_margin; i++) {
-            fprintf(ctx->output, " ");
-        }
-        for (int col = 0; col < ctx->current_table.cols; col++) {
-            fprintf(ctx->output, "|");
-            for (int i = 0; i < ctx->current_table.widths[col] + 2; i++) {
-                fprintf(ctx->output, "-");
+            if (strlen(ctx->current_table.headers[col]) > 0) {
+                has_headers = 1;
+                break;
             }
         }
-        fprintf(ctx->output, "|\n");
+
+        // Renderizar headers si existen
+        if (has_headers) {
+            for (int i = 0; i < ctx->params.left_margin; i++) {
+                fprintf(ctx->output, " ");
+            }
+
+            for (int col = 0; col < ctx->current_table.cols; col++) {
+                int width = ctx->current_table.widths[col];
+                char *header = ctx->current_table.headers[col];
+
+                if (ctx->current_table.aligns[col] == ALIGN_CENTER && width > strlen(header)) {
+                    int padding = (width - strlen(header)) / 2;
+                    for (int i = 0; i < padding; i++) fprintf(ctx->output, " ");
+                    fprintf(ctx->output, "%s", header);
+                    int remaining = width - strlen(header) - padding;
+                    for (int i = 0; i < remaining && i >= 0; i++) fprintf(ctx->output, " ");
+                } else if (ctx->current_table.aligns[col] == ALIGN_RIGHT && width > strlen(header)) {
+                    int spaces = width - strlen(header);
+                    for (int i = 0; i < spaces && i >= 0; i++) fprintf(ctx->output, " ");
+                    fprintf(ctx->output, "%s", header);
+                } else {
+                    fprintf(ctx->output, "%s", header);
+                    for (int i = strlen(header); i < width; i++) fprintf(ctx->output, " ");
+                }
+
+                // Espaciado entre columnas (sin marcos verticales)
+                if (col < ctx->current_table.cols - 1) {
+                    fprintf(ctx->output, "  ");
+                }
+            }
+            fprintf(ctx->output, "\n");
+
+            // Verificar si hay TLINE después de headers (row_index -1)
+            for (int i = 0; i < ctx->current_table.tline_count; i++) {
+                if (ctx->current_table.tline_after_row[i] == -1) {
+                    // Renderizar TLINE
+                    for (int j = 0; j < ctx->params.left_margin; j++) {
+                        fprintf(ctx->output, " ");
+                    }
+                    int total_width = 0;
+                    for (int j = 0; j < ctx->current_table.cols; j++) {
+                        total_width += ctx->current_table.widths[j];
+                    }
+                    if (ctx->current_table.cols > 1) {
+                        total_width += (ctx->current_table.cols - 1) * 2;
+                    }
+                    for (int j = 0; j < total_width; j++) {
+                        fprintf(ctx->output, "-");
+                    }
+                    fprintf(ctx->output, "\n");
+                    break;
+                }
+            }
+        }
 
         for (int row = 0; row < ctx->current_table.row_count; row++) {
             for (int i = 0; i < ctx->params.left_margin; i++) {
@@ -501,7 +528,6 @@ void process_command(stroff_context_t *ctx, const char *line) {
             }
 
             for (int col = 0; col < ctx->current_table.cols; col++) {
-                fprintf(ctx->output, "| ");
                 int width = ctx->current_table.widths[col];
                 char *data = ctx->current_table.data[row][col];
 
@@ -519,13 +545,40 @@ void process_command(stroff_context_t *ctx, const char *line) {
                     fprintf(ctx->output, "%s", data);
                     for (int i = strlen(data); i < width; i++) fprintf(ctx->output, " ");
                 }
-                fprintf(ctx->output, " ");
+
+                // Espaciado entre columnas (sin marcos verticales)
+                if (col < ctx->current_table.cols - 1) {
+                    fprintf(ctx->output, "  ");
+                }
             }
-            fprintf(ctx->output, "|\n");
+            fprintf(ctx->output, "\n");
+
+            // Verificar si hay TLINE después de esta fila
+            for (int i = 0; i < ctx->current_table.tline_count; i++) {
+                if (ctx->current_table.tline_after_row[i] == row) {
+                    // Renderizar TLINE
+                    for (int j = 0; j < ctx->params.left_margin; j++) {
+                        fprintf(ctx->output, " ");
+                    }
+                    int total_width = 0;
+                    for (int j = 0; j < ctx->current_table.cols; j++) {
+                        total_width += ctx->current_table.widths[j];
+                    }
+                    if (ctx->current_table.cols > 1) {
+                        total_width += (ctx->current_table.cols - 1) * 2;
+                    }
+                    for (int j = 0; j < total_width; j++) {
+                        fprintf(ctx->output, "-");
+                    }
+                    fprintf(ctx->output, "\n");
+                    break;
+                }
+            }
         }
 
         fprintf(ctx->output, "\n");
         ctx->current_table.row_count = 0;
+        ctx->current_table.tline_count = 0;
     }
     else if (strcmp(command, "INCLUDE") == 0) {
         char *filename = extract_string_param(line, "INCLUDE");

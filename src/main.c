@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
     process_file(&ctx, argv[1]);
     fclose(ctx.output);
 
+    // Guardar el total de páginas de la primera pasada
+    ctx.total_pages = ctx.current_page;
+
     ctx.output = fopen(argv[2], "w");
     if (!ctx.output) {
         fprintf(stderr, "Error: No se puede abrir el archivo de salida '%s'\n", argv[2]);
@@ -40,6 +43,7 @@ int main(int argc, char *argv[]) {
     strcpy(ctx.current_chapter, "");
     strcpy(ctx.current_subchap, "");
     strcpy(ctx.current_subsubchap, "");
+    // NOTA: NO reinicializar ctx.total_pages - mantiene el valor de la primera pasada
 
     process_file(&ctx, argv[1]);
 

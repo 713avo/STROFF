@@ -169,8 +169,11 @@ El sistema maneja automáticamente:
 ```
 .TABLE COLS=3 WIDTHS=20,15,25 ALIGNS=L,C,R NAME="Mi Tabla"
 .TH "Columna 1" "Columna 2" "Columna 3"
+.TLINE
 .TR "Datos 1" "Datos 2" "Datos 3"
 .TR "Más datos" "Centro" "Derecha"
+.TLINE
+.TR "Total" "Resumen" "Final"
 .ETABLE
 ```
 
@@ -183,11 +186,14 @@ El sistema maneja automáticamente:
 #### Elementos de Tabla
 - `.TH`: Fila de headers (encabezados)
 - `.TR`: Fila de datos regulares
+- `.TLINE`: Línea separadora horizontal opcional
 - `.ETABLE`: Cierra la tabla
 
 **Formato de salida:**
-- Bordes automáticos con caracteres `|`, `-`, `+`
+- Formato limpio sin marcos externos
+- Espaciado uniforme entre columnas (2 espacios)
 - Alineación automática según `ALIGNS`
+- Líneas separadoras opcionales con `.TLINE`
 - Ajuste de contenido según `WIDTHS`
 
 ### Bloques de Código
@@ -256,6 +262,7 @@ en múltiples líneas respetando el ancho de página configurado.
 .CHAP "Datos"
 .TABLE COLS=2 WIDTHS=20,20 ALIGNS=L,R NAME="Tabla de Ejemplo"
 .TH "Concepto" "Valor"
+.TLINE
 .TR "Elemento A" "123"
 .TR "Elemento B" "456"
 .ETABLE

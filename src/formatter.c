@@ -140,6 +140,89 @@ void output_text(stroff_context_t *ctx, const char *text, align_t align) {
     free(text_copy);
 }
 
+void output_list_item(stroff_context_t *ctx, const char *prefix, const char *text) {
+    int content_width = ctx->params.page_width - ctx->params.left_margin - ctx->params.right_margin;
+    int list_base_margin = ctx->params.left_margin + ctx->current_list.indent;
+    int prefix_len = strlen(prefix);
+
+    char words[MAX_LINE_LENGTH][MAX_LINE_LENGTH];
+    int word_count = 0;
+
+    // Dividir texto en palabras
+    char *text_copy = malloc(strlen(text) + 1);
+    strcpy(text_copy, text);
+    char *word = strtok(text_copy, " \t");
+    while (word && word_count < MAX_LINE_LENGTH) {
+        strcpy(words[word_count], word);
+        word_count++;
+        word = strtok(NULL, " \t");
+    }
+
+    if (word_count == 0) {
+        free(text_copy);
+        return;
+    }
+
+    // Procesar palabras línea por línea
+    int current_word = 0;
+    int is_first_line = 1;
+
+    while (current_word < word_count) {
+        char line_words[MAX_LINE_LENGTH][MAX_LINE_LENGTH];
+        int line_word_count = 0;
+        int line_length = 0;
+
+        // Calcular ancho disponible (primera línea incluye prefijo)
+        int available_width = content_width - ctx->current_list.indent;
+        if (is_first_line) {
+            available_width -= prefix_len;
+        }
+
+        // Construir línea respetando ancho disponible
+        while (current_word < word_count) {
+            int word_len = strlen(words[current_word]);
+            int needed = word_len + (line_word_count > 0 ? 1 : 0);
+
+            if (line_length + needed > available_width && line_word_count > 0) {
+                break;
+            }
+
+            strcpy(line_words[line_word_count], words[current_word]);
+            line_length += word_len + (line_word_count > 0 ? 1 : 0);
+            line_word_count++;
+            current_word++;
+        }
+
+        // Imprimir margen izquierdo
+        for (int i = 0; i < list_base_margin; i++) {
+            fprintf(ctx->output, " ");
+        }
+
+        // Imprimir prefijo solo en primera línea
+        if (is_first_line) {
+            fprintf(ctx->output, "%s", prefix);
+            is_first_line = 0;
+        } else {
+            // En líneas siguientes, alinear con el texto (después del prefijo)
+            for (int i = 0; i < prefix_len; i++) {
+                fprintf(ctx->output, " ");
+            }
+        }
+
+        // Imprimir palabras de la línea
+        for (int i = 0; i < line_word_count; i++) {
+            fprintf(ctx->output, "%s", line_words[i]);
+            if (i < line_word_count - 1) fprintf(ctx->output, " ");
+        }
+
+        check_page_break(ctx, 1);
+        fprintf(ctx->output, "\n");
+        ctx->current_line++;
+    }
+
+    free(text_copy);
+}
+
 void output_header(stroff_context_t *ctx) {
     if (strlen(ctx->params.header) == 0) return;
 
@@ -429,5 +512,6 @@ void substitute_variables(stroff_context_t *ctx, char *text) {
         strncpy(before, result, pos - result);
         before[pos - result] = '\0';
         snprintf(text, MAX_TITLE_LENGTH, "%s%d%s", before, ctx->total_pages, pos + 7);
+        strcpy(result, text);
     }
 }

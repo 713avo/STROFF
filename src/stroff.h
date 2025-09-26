@@ -66,6 +66,8 @@ typedef struct {
     char headers[MAX_TABLE_COLS][MAX_TITLE_LENGTH];
     char data[MAX_TABLE_ROWS][MAX_TABLE_COLS][MAX_TITLE_LENGTH];
     int row_count;
+    int tline_after_row[MAX_TABLE_ROWS];  // -1 = after headers, 0+ = after row N
+    int tline_count;
 } table_t;
 
 typedef struct {
@@ -106,6 +108,7 @@ void process_line(stroff_context_t *ctx, const char *line);
 void process_command(stroff_context_t *ctx, const char *line);
 void process_text(stroff_context_t *ctx, const char *text);
 void output_text(stroff_context_t *ctx, const char *text, align_t align);
+void output_list_item(stroff_context_t *ctx, const char *prefix, const char *text);
 void output_header(stroff_context_t *ctx);
 void output_footer(stroff_context_t *ctx);
 void output_toc(stroff_context_t *ctx);

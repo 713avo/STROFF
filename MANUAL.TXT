@@ -20,7 +20,7 @@
 
 
 
-                                 Página 1 de 1
+                                Página 1 de 33
 
 
 
@@ -44,7 +44,7 @@
 
 
 
-                                 Página 2 de 1
+                                Página 2 de 33
 
 
 TABLA DE CONTENIDOS
@@ -53,71 +53,71 @@ TABLA DE CONTENIDOS
     Introducción a STROFF..............................................   3
       Historia y Contexto...............................................   4
       ¿Por qué usar STROFF?...........................................   5
-    Conceptos Fundamentales.............................................   5
-      Directivas y Comandos.............................................   6
-    Introducción.......................................................   6
-      Estructura Jerárquica............................................   7
-      Sistema de Dos Pasadas............................................   8
-    Configuración Básica..............................................   9
-      Información del Documento........................................  10
-      Configuración de Página.........................................  10
-      Formato de Texto..................................................  11
-      Headers y Footers.................................................  12
-    Estructura del Documento............................................  13
-      Inicio y Fin del Documento........................................  14
-      Capítulos y Secciones............................................  15
+    Conceptos Fundamentales.............................................   6
+      Directivas y Comandos.............................................   7
+    Introducción.......................................................   7
+      Estructura Jerárquica............................................   8
+      Sistema de Dos Pasadas............................................   9
+    Configuración Básica..............................................  10
+      Información del Documento........................................  11
+      Configuración de Página.........................................  11
+      Formato de Texto..................................................  12
+      Headers y Footers.................................................  13
+    Estructura del Documento............................................  15
+      Inicio y Fin del Documento........................................  15
+      Capítulos y Secciones............................................  16
 
 
 
-                                 Página 3 de 1
+                                Página 3 de 33
 
-      Generación de Índices...........................................  15
-    Párrafos y Formato de Texto........................................  16
-      Creación y Manejo de Párrafos...................................  16
-      Justificación y Alineación......................................  17
-      Control Avanzado de Líneas.......................................  17
-    Listas y Enumeraciones..............................................  18
-      Sintaxis Básica de Listas........................................  18
-      Tipos de Listas Disponibles.......................................  18
-        Listas con Viñetas (BULLET)....................................  19
-        Listas Numeradas (NUMBER).......................................  19
-        Listas con Números Romanos (RNUMBER)...........................  19
-      Anidación y Listas Complejas.....................................  20
-    Tablas y Datos Estructurados........................................  20
-      Sintaxis Básica de Tablas........................................  20
-      Parámetros de Configuración.....................................  21
-      Elementos de Tabla................................................  21
-      Formato Visual Automático........................................  21
-    Bloques de Código y Texto Literal..................................  22
-      Sintaxis de Bloques de Código....................................  22
-
-
-
-                                 Página 4 de 1
-
-      Características de los Bloques de Código........................  22
-    Funciones Avanzadas.................................................  23
-      Variables en Headers y Footers....................................  23
-      Control de Paginación............................................  23
-    Flujo de Trabajo y Mejores Prácticas...............................  24
-      Organización del Documento.......................................  24
-      Control de Versiones..............................................  24
-      Automatización y Scripts.........................................  25
-    Solución de Problemas Comunes......................................  25
-      Problemas de Formato..............................................  25
-      Errores de Sintaxis...............................................  25
-      Problemas de Rendimiento..........................................  26
-    Referencia Rápida..................................................  26
-      Configuración Global.............................................  26
-      Estructura........................................................  27
-      Contenido.........................................................  27
-    Conclusión.........................................................  27
+      Generación de Índices...........................................  17
+    Párrafos y Formato de Texto........................................  17
+      Creación y Manejo de Párrafos...................................  18
+      Justificación y Alineación......................................  18
+      Control Avanzado de Líneas.......................................  19
+    Listas y Enumeraciones..............................................  20
+      Sintaxis Básica de Listas........................................  20
+      Tipos de Listas Disponibles.......................................  21
+        Listas con Viñetas (BULLET)....................................  21
+        Listas Numeradas (NUMBER).......................................  21
+        Listas con Números Romanos (RNUMBER)...........................  22
+      Anidación y Listas Complejas.....................................  23
+    Tablas y Datos Estructurados........................................  23
+      Sintaxis Básica de Tablas........................................  24
+      Parámetros de Configuración.....................................  24
+      Elementos de Tabla................................................  25
+      Formato Visual Automático........................................  25
+    Bloques de Código y Texto Literal..................................  26
+      Sintaxis de Bloques de Código....................................  26
 
 
 
+                                Página 4 de 33
+
+      Características de los Bloques de Código........................  26
+    Funciones Avanzadas.................................................  27
+      Variables en Headers y Footers....................................  27
+      Control de Paginación............................................  28
+    Flujo de Trabajo y Mejores Prácticas...............................  28
+      Organización del Documento.......................................  28
+      Control de Versiones..............................................  29
+      Automatización y Scripts.........................................  30
+    Solución de Problemas Comunes......................................  30
+      Problemas de Formato..............................................  30
+      Errores de Sintaxis...............................................  30
+      Problemas de Rendimiento..........................................  31
+    Referencia Rápida..................................................  32
+      Configuración Global.............................................  32
+      Estructura........................................................  32
+      Contenido.........................................................  32
+    Conclusión.........................................................  33
 
 
-                                 Página 5 de 1
+
+
+
+                                Página 5 de 33
 
 
 Introducción a STROFF
@@ -141,7 +141,7 @@ Introducción a STROFF
 
 
 
-                                 Página 6 de 1
+                                Página 6 de 33
 
     Manual Completo de STROFF — Introducción a STROFF
 
@@ -166,7 +166,7 @@ Historia y Contexto
 
 
 
-                                 Página 7 de 1
+                                Página 7 de 33
 
     Manual Completo de STROFF — Introducción a STROFF
 
@@ -184,14 +184,29 @@ Historia y Contexto
         Existen  varias  razones  para elegir STROFF sobre otros sistemas de
     formateo:
 
-        1. Control preciso del formato: Cada aspecto del documento puede controlarse exactamente, desde márgenes hasta interlineado.
-        2. Consistencia garantizada: El formato se mantiene consistente en todo el documento automáticamente.
-        3. Separación contenido-formato: Puede cambiar la apariencia completa modificando solo los parámetros de configuración.
-        4. Texto plano portable: Los archivos fuente son texto plano, funcionan en cualquier sistema.
-        5. Control de versiones: Perfecto para usar con Git, SVN u otros sistemas de control de versiones.
-        6. Automatización: Ideal para generar documentos automáticamente desde scripts o sistemas.
-        7. Documentos largos: Manejo eficiente de libros, manuales y documentos de cientos de páginas.
-        8. Formato profesional: Produce documentos con calidad tipográfica profesional.
+        1. Control preciso del formato: Cada aspecto del documento puede
+           controlarse exactamente, desde márgenes hasta interlineado.
+        2. Consistencia garantizada: El formato se mantiene consistente en
+           todo el documento automáticamente.
+        3. Separación contenido-formato: Puede cambiar la apariencia
+           completa modificando solo los parámetros de configuración.
+
+
+                                Página 8 de 33
+
+    Manual Completo de STROFF — Introducción a STROFF
+
+
+        4. Texto plano portable: Los archivos fuente son texto plano,
+           funcionan en cualquier sistema.
+        5. Control de versiones: Perfecto para usar con Git, SVN u otros
+           sistemas de control de versiones.
+        6. Automatización: Ideal para generar documentos automáticamente
+           desde scripts o sistemas.
+        7. Documentos largos: Manejo eficiente de libros, manuales y
+           documentos de cientos de páginas.
+        8. Formato profesional: Produce documentos con calidad tipográfica
+           profesional.
 
 
 Conceptos Fundamentales
@@ -199,15 +214,15 @@ Conceptos Fundamentales
 
 
         Antes  de  comenzar  a  crear  documentos,  es esencial entender los
+    conceptos  fundamentales  que  rigen  el funcionamiento de STROFF. Estos
+    conceptos  le  ayudarán  a  comprender  por qué el sistema funciona de
 
 
-                                 Página 8 de 1
+                                Página 9 de 33
 
     Manual Completo de STROFF — Conceptos Fundamentales
 
 
-    conceptos  fundamentales  que  rigen  el funcionamiento de STROFF. Estos
-    conceptos  le  ayudarán  a  comprender  por qué el sistema funciona de
     cierta manera y cómo aprovechar al máximo sus capacidades.
 
 Directivas y Comandos
@@ -226,15 +241,15 @@ Introducción
 
 
         Es  crucial  entender  que  las  directivas no aparecen en la salida
+    final; son instrucciones para el procesador STROFF. Solo el texto normal
+    (las  líneas que no comienzan con punto) aparece en el documento final,
 
 
-                                 Página 9 de 1
+                                Página 10 de 33
 
     Mi Documento — Introducción
 
 
-    final; son instrucciones para el procesador STROFF. Solo el texto normal
-    (las  líneas que no comienzan con punto) aparece en el documento final,
     formateado según las directivas que las rodean.
 
 Estructura Jerárquica
@@ -245,24 +260,24 @@ Estructura Jerárquica
     predefinida:
 
         1. Configuración global: Parámetros que afectan todo el documento.
-        2. Inicio del documento: La directiva .DOCUMENT que marca el comienzo real del contenido.
-        3. Contenido estructurado: Capítulos, secciones y párrafos organizados jerárquicamente.
+        2. Inicio del documento: La directiva .DOCUMENT que marca el
+           comienzo real del contenido.
+        3. Contenido estructurado: Capítulos, secciones y párrafos
+           organizados jerárquicamente.
         4. Cierre del documento: La directiva .EDOC que marca el final.
 
 
         Esta  estructura no es opcional; STROFF requiere que siga este orden
     para  funcionar  correctamente. Los parámetros globales deben definirse
     antes  de  .DOCUMENT, los capítulos deben declararse antes de usarse en
-    índices, etc.
 
 
-
-
-
-                                Página 10 de 1
+                                Página 11 de 33
 
     Mi Documento — Introducción
 
+
+    índices, etc.
 
 Sistema de Dos Pasadas
 ----------------------
@@ -281,14 +296,14 @@ Sistema de Dos Pasadas
     contenido  correctas,  referencias  cruzadas  exactas  y  numeración de
     páginas precisa.
 
-        Como  usuario,  esto es transparente; simplemente ejecuta el comando
 
-
-                                Página 11 de 1
+                                Página 12 de 33
 
     Mi Documento — Introducción
 
 
+
+        Como  usuario,  esto es transparente; simplemente ejecuta el comando
     stroff  una  vez y el sistema maneja automáticamente ambas pasadas. Sin
     embargo,  es  importante  entender  este proceso porque explica por qué
     algunas  funciones  (como  .MAKETOC) requieren que los capítulos estén
@@ -307,9 +322,7 @@ Configuración Básica
 
 
 
-
-
-                                Página 12 de 1
+                                Página 13 de 33
 
     Mi Documento — Configuración Básica
 
@@ -322,11 +335,10 @@ Información del Documento
     información   básica   que  aparecerá  en  la  portada  y  puede  ser
     referenciada en headers y footers:
 
-    |                      |                                |                           |
-    |----------------------|--------------------------------|---------------------------|
-    | .TITLE \             | texto\                         |                           |
-    | .AUTH \              | texto\                         |                           |
-    | .DATE \              | texto\                         |                           |
+    Comando               Descripción                    Ejemplo                  
+    .TITLE \              texto\                                                   
+    .AUTH \               texto\                                                   
+    .DATE \               texto\                                                   
 
 
         Estos  parámetros  son  opcionales, pero altamente recomendados. El
@@ -341,19 +353,18 @@ Configuración de Página
         Los  parámetros  de página controlan las dimensiones físicas y el
 
 
-                                Página 13 de 1
+                                Página 14 de 33
 
     Mi Documento — Configuración Básica
 
 
     layout básico de todas las páginas del documento:
 
-    |                      |                                |                           |
-    |----------------------|--------------------------------|---------------------------|
-    | .PAGEWIDTH n         | Ancho total en caracteres      | .PAGEWIDTH 80             |
-    | .PAGEHEIGHT n        | Alto en líneas (0=sin paginación) | .PAGEHEIGHT 24            |
-    | .LMARGIN n           | Margen izquierdo en espacios   | .LMARGIN 4                |
-    | .RMARGIN n           | Margen derecho en espacios     | .RMARGIN 4                |
+    Comando               Descripción                    Ejemplo                  
+    .PAGEWIDTH n          Ancho total en caracteres       .PAGEWIDTH 80            
+    .PAGEHEIGHT n         Alto en líneas (0=sin paginación)  .PAGEHEIGHT 24           
+    .LMARGIN n            Margen izquierdo en espacios    .LMARGIN 4               
+    .RMARGIN n            Margen derecho en espacios      .RMARGIN 4               
 
 
         El  ancho  efectivo  de  texto  será  PAGEWIDTH menos LMARGIN menos
@@ -372,17 +383,16 @@ Formato de Texto
         Estos  parámetros  controlan cómo se formatea y justifica el texto
     en todo el documento:
 
-    |                      |                                |                           |
-    |----------------------|--------------------------------|---------------------------|
-    | .INDENT n            | Sangría de párrafos en espacios | .INDENT 4                 |
-    | .TABSIZE n           | Tamaño de tabulación         | .TABSIZE 4                |
-    | .JUSTIFY modo        | Justificación global          | .JUSTIFY FULL             |
-    | .LINESPACE n         | Interlineado (1=simple, 2=doble) | .LINESPACE 1              |
+    Comando               Descripción                    Ejemplo                  
+    .INDENT n             Sangría de párrafos en espacios  .INDENT 4                
+    .TABSIZE n            Tamaño de tabulación          .TABSIZE 4               
+    .JUSTIFY modo         Justificación global           .JUSTIFY FULL            
+    .LINESPACE n          Interlineado (1=simple, 2=doble)  .LINESPACE 1             
 
 
 
 
-                                Página 14 de 1
+                                Página 15 de 33
 
     Mi Documento — Configuración Básica
 
@@ -407,25 +417,24 @@ Headers y Footers
         Los  headers  (cabeceras) y footers (pies de página) aparecen en la
     parte   superior   e  inferior  de  cada  página  respectivamente.  Son
     especialmente  útiles  para  mostrar  información  de contexto como el
-    título del documento, capítulo actual y numeración de páginas:
-
-    |                      |                                |                           |
-    |----------------------|--------------------------------|---------------------------|
-    | .HEADER \            | texto\                         |                           |
-    | .HEADALIGN modo      | Alineación de cabecera        | .HEADALIGN CENTER         |
-    | .FOOTER \            | texto\                         |                           |
-    | .FOOTALIGN modo      | Alineación de pie             | .FOOTALIGN RIGHT          |
 
 
-        Los headers y footers admiten variables especiales que se sustituyen
-    automáticamente:
-
-
-                                Página 15 de 1
+                                Página 16 de 33
 
     Mi Documento — Configuración Básica
 
 
+    título del documento, capítulo actual y numeración de páginas:
+
+    Comando               Descripción                    Ejemplo                  
+    .HEADER \             texto\                                                   
+    .HEADALIGN modo       Alineación de cabecera         .HEADALIGN CENTER        
+    .FOOTER \             texto\                                                   
+    .FOOTALIGN modo       Alineación de pie              .FOOTALIGN RIGHT         
+
+
+        Los headers y footers admiten variables especiales que se sustituyen
+    automáticamente:
 
         * {TITLE}: Título del documento
         * {CHAPTITLE}: Título del capítulo actual
@@ -440,6 +449,15 @@ Headers y Footers
     evita contaminación visual en páginas especiales y mantiene un formato
     profesional.
 
+
+
+
+
+                                Página 17 de 33
+
+    Mi Documento — Configuración Básica
+
+
 Estructura del Documento
 ========================
 
@@ -448,16 +466,6 @@ Estructura del Documento
     documento  siguiendo el formato requerido por STROFF. Esta estructura no
     es  negociable;  es  la  forma  en  que  STROFF organiza internamente la
     información para producir salida consistente y profesional.
-
-
-
-
-
-
-                                Página 16 de 1
-
-    Mi Documento — Estructura del Documento
-
 
 Inicio y Fin del Documento
 --------------------------
@@ -489,17 +497,18 @@ Inicio y Fin del Documento
 
 
 
-                                Página 17 de 1
+                                Página 18 de 33
 
 
-                                Página 17 de 1
+                                Página 18 de 33
 
     Mi Documento — Estructura del Documento
 
 
 
         1. Marca el inicio oficial del contenido procesable
-        2. Genera automáticamente la página de título si hay información configurada
+        2. Genera automáticamente la página de título si hay información
+           configurada
         3. Inicializa el sistema de paginación si está activado
         4. Prepara el contexto para procesar capítulos y secciones
 
@@ -515,27 +524,32 @@ Capítulos y Secciones
 
 
 
-    |                      |                           |                                |
-    |----------------------|---------------------------|--------------------------------|
-    | .CHAP \              | título\                  |                                |
-    | .SUBCHAP \           | título\                  |                                |
-    | .SUBSUBCHAP \        | título\                  |                                |
+    Comando               Nivel                      Descripción                  
+    .CHAP \               título\                                                 
+    .SUBCHAP \            título\                                                 
+    .SUBSUBCHAP \         título\                                                 
 
 
 
         * Registra el título en el sistema para uso en tablas de contenido
         * Actualiza las variables de contexto para headers/footers
         * Aplica el formato visual apropiado (subrayado, espaciado, etc.)
+
+
+                                Página 19 de 33
+
+    Mi Documento — Estructura del Documento
+
+
         * Registra la página actual para referencias en índices
 
 
 
 
-    |                           |                                               |
-    |---------------------------|-----------------------------------------------|
-    | .ECHAP                    | Cierra el capítulo actual                    |
-    | .ESCHAP                   | Cierra el subcapítulo actual                 |
-    | .ESSCHAP                  | Cierra el sub-subcapítulo actual             |
+    Comando                    Función                                     
+    .ECHAP                     Cierra el capítulo actual                   
+    .ESCHAP                    Cierra el subcapítulo actual                
+    .ESSCHAP                   Cierra el sub-subcapítulo actual            
 
 
 Generación de Índices
@@ -543,25 +557,25 @@ Generación de Índices
 
 
 
-    |                      |                                                    |
-    |----------------------|----------------------------------------------------|
-    | .MAKETOC             | Genera tabla de contenidos completa con capítulos y secciones |
-    | .MAKETOT             | Genera índice de tablas con nombres y números de página |
+    Comando               Descripción                                      
+    .MAKETOC              Genera tabla de contenidos completa con capítulos y secciones
+    .MAKETOT              Genera índice de tablas con nombres y números de página
 
 
 
-
-
-
-
-                                Página 18 de 1
-
-    Mi Documento — Estructura del Documento
 
 
 Párrafos y Formato de Texto
 ============================
 
+
+
+
+
+
+                                Página 20 de 33
+
+    Mi Documento — Párrafos y Formato de Texto
 
 
 Creación y Manejo de Párrafos
@@ -576,25 +590,26 @@ Creación y Manejo de Párrafos
 
 
 
-
-
-
-
-
-                                Página 19 de 1
-
-    Mi Documento — Párrafos y Formato de Texto
-
-
 Justificación y Alineación
 ----------------------------
 
 
 
-        * LEFT: Texto alineado a la izquierda con borde derecho irregular. Ideal para la mayoría de textos informales.
-        * RIGHT: Texto alineado a la derecha con borde izquierdo irregular. Útil para efectos especiales o datos numéricos.
-        * CENTER: Texto centrado en cada línea. Apropiado para títulos, citas destacadas o elementos decorativos.
-        * FULL: Justificación completa con distribución uniforme de espacios. Produce apariencia profesional similar a libros impresos.
+        * LEFT: Texto alineado a la izquierda con borde derecho irregular.
+          Ideal para la mayoría de textos informales.
+        * RIGHT: Texto alineado a la derecha con borde izquierdo irregular.
+          Útil para efectos especiales o datos numéricos.
+
+
+                                Página 21 de 33
+
+    Mi Documento — Párrafos y Formato de Texto
+
+
+        * CENTER: Texto centrado en cada línea. Apropiado para títulos,
+          citas destacadas o elementos decorativos.
+        * FULL: Justificación completa con distribución uniforme de
+          espacios. Produce apariencia profesional similar a libros impresos.
 
 
 
@@ -604,10 +619,9 @@ Control Avanzado de Líneas
 
 
 
-    |                           |                                               |
-    |---------------------------|-----------------------------------------------|
-    | .BREAK                    | Inserta un salto de línea manual dentro de un párrafo |
-    | .LINESPACE n              | Cambia el interlineado (1=simple, 2=doble, etc.) |
+    Comando                    Función                                     
+    .BREAK                     Inserta un salto de línea manual dentro de un párrafo
+    .LINESPACE n               Cambia el interlineado (1=simple, 2=doble, etc.)
 
 
 
@@ -618,7 +632,7 @@ Control Avanzado de Líneas
 
 
 
-                                Página 20 de 1
+                                Página 22 de 33
 
     Mi Documento — Párrafos y Formato de Texto
 
@@ -642,22 +656,21 @@ Sintaxis Básica de Listas
 
 
         * TYPE: Define el tipo de lista (BULLET, NUMBER, RNUMBER)
-        * INDENT: Número de espacios de indentación desde el margen izquierdo
+        * INDENT: Número de espacios de indentación desde el margen
+          izquierdo
         * CHAR: Carácter específico para listas de viñetas
+
+
+
+
+                                Página 23 de 33
+
+    Mi Documento — Listas y Enumeraciones
 
 
 Tipos de Listas Disponibles
 ---------------------------
 
-
-
-
-
-
-
-                                Página 21 de 1
-
-    Mi Documento — Listas y Enumeraciones
 
 
 Listas con Viñetas (BULLET)
@@ -677,6 +690,13 @@ Listas con Viñetas (BULLET)
 
 
 Listas Numeradas (NUMBER)
+
+
+
+
+                                Página 24 de 33
+
+    Mi Documento — Listas y Enumeraciones
 
 
 
@@ -710,13 +730,11 @@ Listas con Números Romanos (RNUMBER)
         III. Tercer punto principal
 
 
-
-
-
-
-                                Página 22 de 1
+                                Página 25 de 33
 
     Mi Documento — Listas y Enumeraciones
+
+
 
 
 Anidación y Listas Complejas
@@ -742,26 +760,25 @@ Tablas y Datos Estructurados
 
 
 
+
+
+
+
+                                Página 26 de 33
+
+    Mi Documento — Tablas y Datos Estructurados
+
+
 Sintaxis Básica de Tablas
 --------------------------
 
 
 
 
-    |                      |                 |                           |
-    |----------------------|-----------------|---------------------------|
-    | Datos 1              |     Datos 2     |                   Datos 3 |
-    | Más datos           |     Centro      |                   Derecha |
+    Encabezado 1           Encabezado 2                 Encabezado 3
+    Datos 1                   Datos 2                        Datos 3
+    Más datos                Centro                         Derecha
 
-
-
-
-
-
-
-                                Página 23 de 1
-
-    Mi Documento — Tablas y Datos Estructurados
 
 
 Parámetros de Configuración
@@ -769,12 +786,11 @@ Parámetros de Configuración
 
 
 
-    |                 |                           |                                     |
-    |-----------------|---------------------------|-------------------------------------|
-    | COLS=n          | Número de columnas (requerido) | COLS=3                              |
-    | WIDTHS=n1,n2,n3 | Anchos de columnas en caracteres | WIDTHS=20,15,25                     |
-    | ALIGNS=L,C,R    | Alineaciones por columna  | ALIGNS=L,C,R                        |
-    | NAME=\          | texto\                    |                                     |
+    Parámetro       Descripción               Ejemplo                            
+    COLS=n           Número de columnas (requerido)  COLS=3                             
+    WIDTHS=n1,n2,n3  Anchos de columnas en caracteres  WIDTHS=20,15,25                    
+    ALIGNS=L,C,R     Alineaciones por columna   ALIGNS=L,C,R                       
+    NAME=\           texto\                                                        
 
 
 
@@ -784,15 +800,26 @@ Parámetros de Configuración
         * R: Alineación a la derecha (apropiada para números)
 
 
+
+
+
+
+
+                                Página 27 de 33
+
+    Mi Documento — Tablas y Datos Estructurados
+
+
 Elementos de Tabla
 ------------------
 
 
 
-    |                 |                                                         |
-    |-----------------|---------------------------------------------------------|
-    | .TH             | Fila de encabezados con formato destacado               |
-    | .TR             | Fila regular de datos                                   |
+    Comando          Descripción                                           
+    ------------------------------------------------------------------------
+    .TH              Fila de encabezados con formato destacado              
+    .TR              Fila regular de datos                                  
+    .TLINE           Línea separadora horizontal                           
 
 
 
@@ -802,18 +829,29 @@ Formato Visual Automático
 
 
 
+        * Espaciado uniforme entre columnas (2 espacios)
+        * Alineación precisa según especificaciones (L, C, R)
+        * Headers diferenciados visualmente del contenido
+        * Separadores opcionales con la directiva .TLINE
 
-                                Página 24 de 1
+
+
+
+    Header 1                                    Header 2
+    ----------------------------------------------------
+    Datos 1                                      Valor 1
+    Datos 2                                      Valor 2
+    ----------------------------------------------------
+    Total                                           Suma
+
+
+
+
+
+
+                                Página 28 de 33
 
     Mi Documento — Tablas y Datos Estructurados
-
-
-
-        * Bordes verticales: | (pipe) para separar columnas
-        * Bordes horizontales: - (guión) para separar filas
-        * Intersecciones: + (plus) en los cruces de líneas
-        * Padding interno: Espacios automáticos para alineación
-
 
 
 Bloques de Código y Texto Literal
@@ -835,18 +873,22 @@ Características de los Bloques de Código
 
 
 
-        1. Preservación exacta: Todo el espaciado, tabulaciones y formato se mantiene intacto.
-        2. Sin justificación: No se aplica text wrapping ni justificación al contenido.
-        3. Respeto de márgenes: Se mantienen los márgenes izquierdo y derecho configurados.
-        4. Font monoespacio implícito: El contenido se asume en fuente de ancho fijo.
+        1. Preservación exacta: Todo el espaciado, tabulaciones y formato
+           se mantiene intacto.
+        2. Sin justificación: No se aplica text wrapping ni justificación
+           al contenido.
 
 
-
-
-
-                                Página 25 de 1
+                                Página 29 de 33
 
     Mi Documento — Bloques de Código y Texto Literal
+
+
+        3. Respeto de márgenes: Se mantienen los márgenes izquierdo y
+           derecho configurados.
+        4. Font monoespacio implícito: El contenido se asume en fuente de
+           ancho fijo.
+
 
 
 Funciones Avanzadas
@@ -859,15 +901,22 @@ Variables en Headers y Footers
 
 
 
-    |                      |                                                    |
-    |----------------------|----------------------------------------------------|
-    | {TITLE}              | Título del documento según .TITLE                |
-    | {CHAPTITLE}          | Título del capítulo actual                       |
-    | {SUBCHAP}            | Título del subcapítulo actual                    |
-    | {SUBSUBCHAP}         | Título del sub-subcapítulo actual                |
-    | {PAGE}               | Número de página actual                          |
-    | {PAGES}              | Total de páginas (disponible en segunda pasada)   |
+    Variable              Contenido                                         
+    {TITLE}               Título del documento según .TITLE               
+    {CHAPTITLE}           Título del capítulo actual                      
+    {SUBCHAP}             Título del subcapítulo actual                   
+    {SUBSUBCHAP}          Título del sub-subcapítulo actual               
+    {PAGE}                Número de página actual                         
+    {PAGES}               Total de páginas (disponible en segunda pasada)  
 
+
+
+
+
+
+                                Página 30 de 33
+
+    Mi Documento — Funciones Avanzadas
 
 
 Control de Paginación
@@ -875,18 +924,9 @@ Control de Paginación
 
 
 
-    |                      |                                                    |
-    |----------------------|----------------------------------------------------|
-    | .PAGEBREAK           | Fuerza un salto de página inmediato               |
+    Comando               Función                                          
+    .PAGEBREAK            Fuerza un salto de página inmediato              
 
-
-
-
-
-
-                                Página 26 de 1
-
-    Mi Documento — Funciones Avanzadas
 
 
 Flujo de Trabajo y Mejores Prácticas
@@ -899,10 +939,21 @@ Organización del Documento
 
 
 
-        1. Configuración al inicio: Defina todos los parámetros globales antes de .DOCUMENT.
-        2. Comentarios abundantes: Use líneas que comienzan con # para documentar su configuración.
-        3. Secciones claras: Separe visualmente las diferentes partes de su documento fuente.
-        4. Nombres descriptivos: Use nombres de archivo descriptivos que indiquen el contenido.
+        1. Configuración al inicio: Defina todos los parámetros globales
+           antes de .DOCUMENT.
+        2. Comentarios abundantes: Use líneas que comienzan con # para
+
+
+                                Página 31 de 33
+
+    Mi Documento — Flujo de Trabajo y Mejores Prácticas
+
+
+           documentar su configuración.
+        3. Secciones claras: Separe visualmente las diferentes partes de su
+           documento fuente.
+        4. Nombres descriptivos: Use nombres de archivo descriptivos que
+           indiquen el contenido.
 
 
 Control de Versiones
@@ -910,18 +961,18 @@ Control de Versiones
 
 
 
-        * Use Git o sistemas similares para versionar sus documentos fuente .TRF
+        * Use Git o sistemas similares para versionar sus documentos fuente
+          .TRF
         * Incluya la salida .TXT en el repositorio para referencias rápidas
         * Documente cambios importantes en commits descriptivos
-        * Use branches para experimentos de formato sin afectar la versión principal
+        * Use branches para experimentos de formato sin afectar la versión
+          principal
 
 
 
 
 
-
-
-                                Página 27 de 1
+                                Página 32 de 33
 
     Mi Documento — Flujo de Trabajo y Mejores Prácticas
 
@@ -942,12 +993,11 @@ Problemas de Formato
 --------------------
 
 
-    |                                     |                                     |
-    |-------------------------------------|-------------------------------------|
-    | Texto se corta en tablas            | Aumentar valores en WIDTHS o reducir contenido |
-    | Márgenes incorrectos               | Verificar que LMARGIN + RMARGIN < PAGEWIDTH |
-    | Indentación no funciona            | Asegurar que .P precede al texto del párrafo |
-    | Headers no aparecen                 | Los headers solo se muestran en páginas de capítulos |
+    Problema                             Solución                          
+    Texto se corta en tablas             Aumentar valores en WIDTHS o reducir contenido
+    Márgenes incorrectos                Verificar que LMARGIN + RMARGIN < PAGEWIDTH
+    Indentación no funciona             Asegurar que .P precede al texto del párrafo
+    Headers no aparecen                  Los headers solo se muestran en páginas de capítulos
 
 
 Errores de Sintaxis
@@ -956,13 +1006,14 @@ Errores de Sintaxis
 
 
 
-                                Página 28 de 1
+                                Página 33 de 33
 
     Mi Documento — Solución de Problemas Comunes
 
 
 
-        * Olvidar comillas en parámetros de texto: .TITLE Mi Documento (incorrecto) vs .TITLE \
+        * Olvidar comillas en parámetros de texto: .TITLE Mi Documento
+          (incorrecto) vs .TITLE \
         * Comandos mal escritos: .CHAP vs .CHAPTER (solo .CHAP es válido)
         * Estructura incorrecta: contenido antes de .DOCUMENT
         * Parámetros faltantes: .TABLE sin especificar COLS
@@ -979,51 +1030,58 @@ Problemas de Rendimiento
         4. Evite listas con cientos de elementos
 
 
+
+
+
+
+
+                                Página 34 de 33
+
+    Mi Documento — Solución de Problemas Comunes
+
+
 Referencia Rápida
 ==================
 
 
 
-    |                           |                                               |
-    |---------------------------|-----------------------------------------------|
-    | .TITLE \                  | texto\                                        |
-    | .AUTH \                   | texto\                                        |
-    | .DATE \                   | texto\                                        |
-    | .PAGEWIDTH n              | Ancho de página en caracteres                |
-    | .PAGEHEIGHT n             | Alto de página en líneas                    |
-    | .LMARGIN n                | Margen izquierdo                              |
-    | .RMARGIN n                | Margen derecho                                |
-    | .INDENT n                 | Indentación de párrafos                     |
-    | .JUSTIFY modo             | LEFT, RIGHT, CENTER, FULL                     |
-    | .HEADER \                 | texto\                                        |
-    | .FOOTER \                 | texto\                                        |
+    Comando                    Descripción                                 
+    .TITLE \                   texto\                                       
+    .AUTH \                    texto\                                       
+    .DATE \                    texto\                                       
+    .PAGEWIDTH n               Ancho de página en caracteres               
+    .PAGEHEIGHT n              Alto de página en líneas                   
+    .LMARGIN n                 Margen izquierdo                             
+    .RMARGIN n                 Margen derecho                               
+    .INDENT n                  Indentación de párrafos                    
+    .JUSTIFY modo              LEFT, RIGHT, CENTER, FULL                    
+    .HEADER \                  texto\                                       
+    .FOOTER \                  texto\                                       
 
 
-    |                           |                                               |
-    |---------------------------|-----------------------------------------------|
-    | .DOCUMENT                 | Inicia el documento                           |
-    | .EDOC                     | Finaliza el documento                         |
-    | .CHAP \                   | título\                                      |
-    | .SUBCHAP \                | título\                                      |
-    | .SUBSUBCHAP \             | título\                                      |
-    | .MAKETOC                  | Tabla de contenidos                           |
-    | .MAKETOT                  | Índice de tablas                             |
-    | .PAGEBREAK                | Salto de página                              |
+    Comando                    Descripción                                 
+    .DOCUMENT                  Inicia el documento                          
+    .EDOC                      Finaliza el documento                        
+    .CHAP \                    título\                                     
+    .SUBCHAP \                 título\                                     
+    .SUBSUBCHAP \              título\                                     
+    .MAKETOC                   Tabla de contenidos                          
+    .MAKETOT                   Índice de tablas                            
+    .PAGEBREAK                 Salto de página                             
 
 
-    |                           |                                               |
-    |---------------------------|-----------------------------------------------|
-    | .P [alineación]          | Nuevo párrafo                                |
-    | .BREAK                    | Salto de línea                               |
-    | .CODE                     | Inicia bloque de código                      |
-    | .ECODE                    | Termina bloque de código                     |
-    | .LIST parámetros         | Inicia lista                                  |
-    | .ITEM \                   | texto\                                        |
-    | .ELIST                    | Termina lista                                 |
-    | .TABLE parámetros        | Inicia tabla                                  |
-    | .TH elementos             | Fila de encabezados                           |
-    | .TR elementos             | Fila de datos                                 |
-    | .ETABLE                   | Termina tabla                                 |
+    Comando                    Descripción                                 
+    .P [alineación]           Nuevo párrafo                               
+    .BREAK                     Salto de línea                              
+    .CODE                      Inicia bloque de código                     
+    .ECODE                     Termina bloque de código                    
+    .LIST parámetros          Inicia lista                                 
+    .ITEM \                    texto\                                       
+    .ELIST                     Termina lista                                
+    .TABLE parámetros         Inicia tabla                                 
+    .TH elementos              Fila de encabezados                          
+    .TR elementos              Fila de datos                                
+    .ETABLE                    Termina tabla                                
 
 
 
@@ -1035,4 +1093,10 @@ Referencia Rápida
 
 
 
-                                Página 29 de 1
+
+
+
+
+
+
+                                Página 35 de 33
