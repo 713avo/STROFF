@@ -1,0 +1,1041 @@
+
+                             Complete STROFF Manual
+
+                            Technical Documentation
+
+                                   2025-09-25
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  Page 1 of 30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  Page 2 of 30
+
+
+TABLA DE CONTENIDOS
+==================
+
+    Introduction to STROFF..............................................   3
+      History and Context...............................................   4
+      Why Use STROFF?...................................................   5
+    Fundamental Concepts................................................   6
+      Directives and Commands...........................................   7
+    Introduction........................................................   7
+      Hierarchical Structure............................................   8
+      Two-Pass Processing...............................................   9
+    Basic Configuration.................................................  10
+      Document Identification...........................................  10
+      Page Configuration................................................  11
+      Text Formatting...................................................  12
+      Headers and Footers...............................................  13
+    Document Structure..................................................  14
+      Document Start and End............................................  14
+      Chapters and Hierarchical Structure...............................  15
+
+
+
+                                  Page 3 of 30
+
+      Automatic Indexes.................................................  16
+    Paragraphs and Text Formatting......................................  16
+      Creating Paragraphs...............................................  16
+      Text Wrapping and Justification...................................  17
+      Line Control......................................................  17
+    Lists and Structured Content........................................  18
+      Basic List Syntax.................................................  18
+      List Types........................................................  18
+        Bullet Lists....................................................  19
+        Numbered Lists..................................................  19
+        Roman Numeral Lists.............................................  20
+      Text Wrapping in Lists............................................  20
+    Tables and Structured Data..........................................  21
+      Basic Table Syntax................................................  21
+      Configuration Parameters..........................................  21
+      Table Elements....................................................  22
+      Automatic Visual Formatting.......................................  22
+    Code Blocks and Literal Text........................................  23
+      Code Block Syntax.................................................  23
+
+
+
+                                  Page 4 of 30
+
+      When to Use Code Blocks...........................................  23
+    Page Control and Pagination.........................................  24
+      Manual Page Control...............................................  24
+      Headers and Footers in Pagination.................................  25
+    Advanced Variables and Substitution.................................  25
+      Available Variables...............................................  26
+      Using Variables Effectively.......................................  26
+    Best Practices and Workflow.........................................  26
+      Document Planning.................................................  27
+      Development Workflow..............................................  27
+      Version Control...................................................  28
+    Troubleshooting and Common Problems.................................  28
+      Common Errors.....................................................  29
+      Debugging Tips....................................................  29
+    Complete Command Reference..........................................  30
+      Configuration Commands............................................  30
+      Structure Commands................................................  30
+      Content Commands..................................................  30
+
+
+
+
+                                  Page 5 of 30
+
+
+Introduction to STROFF
+======================
+
+
+        STROFF  is a powerful document formatting system based on plain text
+    markup,  inspired by the legendary RUNOFF and ROFF systems used in early
+    Unix  systems.  This  manual  will  guide you step by step from the most
+    basic   concepts   to  advanced  techniques  for  professional  document
+    formatting.
+
+        Text  formatting  systems  like STROFF belong to a category of tools
+    known  as  programmable text processors. Unlike WYSIWYG (What You See Is
+    What  You  Get)  processors like Word or Writer, markup-based formatting
+    systems  completely  separate  content from presentation. This means you
+    write  text  along with special commands called "directives" or "marks,"
+    and the system handles generating the final formatted output.
+
+        The  main  advantage  of  this  approach  is  precise and consistent
+    control  over  formatting,  especially  useful  for technical documents,
+
+
+                                  Page 6 of 30
+
+    Complete STROFF Manual — Introduction to STROFF
+
+
+    manuals,  academic articles, and any document requiring professional and
+    uniform  presentation.  Additionally, being plain text, STROFF documents
+    are completely portable, version-controllable with systems like Git, and
+    can be edited with any text editor.
+
+History and Context
+-------------------
+
+
+        The  original RUNOFF system was developed in the 1960s at MIT, being
+    one  of the first computerized text formatting systems. Later, Bell Labs
+    developed ROFF and its variants (nroff, troff) which became standards in
+    Unix  systems.  These  systems  established many of the conventions that
+    STROFF adopts and modernizes.
+
+        STROFF  takes the best from these classic systems and adapts them to
+    modern  needs. It maintains the conceptual simplicity and power of ROFF,
+    but  with  clearer  syntax  and  modern  features  like  automatic  full
+
+
+                                  Page 7 of 30
+
+    Complete STROFF Manual — Introduction to STROFF
+
+
+    justification, intelligent pagination, and automatic index generation.
+
+Why Use STROFF?
+---------------
+
+
+        There  are  several  reasons  to choose STROFF over other formatting
+    systems:
+
+        1. Precise format control: Every aspect of the document can be
+           controlled exactly, from margins to line spacing.
+        2. Guaranteed consistency: Formatting remains consistent throughout
+           the document automatically.
+        3. Content-format separation: You can change the entire appearance
+           by modifying only configuration parameters.
+        4. Portable plain text: Source files are plain text, work on any
+           system.
+        5. Version control: Perfect for use with Git, SVN, or other version
+           control systems.
+
+
+                                  Page 8 of 30
+
+    Complete STROFF Manual — Introduction to STROFF
+
+
+        6. Automation: Ideal for generating documents automatically from
+           scripts or systems.
+        7. Long documents: Efficient handling of books, manuals, and
+           hundreds-page documents.
+        8. Professional format: Produces documents with professional
+           typographic quality.
+
+
+Fundamental Concepts
+====================
+
+
+        Before  starting  to  create documents, it's essential to understand
+    the  fundamental concepts that govern STROFF's operation. These concepts
+    will  help  you understand why the system works a certain way and how to
+    make the most of its capabilities.
+
+
+
+
+
+                                  Page 9 of 30
+
+    Complete STROFF Manual — Fundamental Concepts
+
+
+Directives and Commands
+-----------------------
+
+
+        In  STROFF,  all  formatting instructions are called "directives" or
+    "commands." These always begin with a dot (.) at the start of a line and
+    are followed by the command name and its parameters. For example:
+
+
+Introduction
+============
+
+
+
+        It's crucial to understand that directives don't appear in the final
+    output; they are instructions for the STROFF processor. Only normal text
+    (lines  that  don't  start  with  a  dot) appears in the final document,
+    formatted according to the surrounding directives.
+
+
+
+
+                                 Page 10 of 30
+
+    My Document — Introduction
+
+
+Hierarchical Structure
+----------------------
+
+
+        STROFF   documents   follow  a  clear  and  predefined  hierarchical
+    structure:
+
+        1. Global configuration: Parameters that affect the entire document.
+        2. Document start: The .DOCUMENT directive that marks the actual
+           beginning of content.
+        3. Structured content: Chapters, sections, and paragraphs organized
+           hierarchically.
+        4. Document close: The .EDOC directive that marks the end.
+
+
+        This  structure  is  not  optional;  it's  the  way STROFF organizes
+    information  internally  to  produce consistent and professional output.
+    Understanding and respecting this hierarchy is fundamental for effective
+    STROFF usage.
+
+
+
+                                 Page 11 of 30
+
+    My Document — Introduction
+
+
+Two-Pass Processing
+-------------------
+
+
+        One  of  STROFF's most important features is its two-pass processing
+    system. This means the document is processed twice:
+
+        1. First pass: Collects information about chapters, tables, and
+           calculates total pages.
+        2. Second pass: Generates the final formatted output with all
+           cross-references and correct page numbers.
+
+
+        This  system  allows  advanced  features like table of contents with
+    correct   page   numbers,  total  page  count  in  headers/footers,  and
+    consistent cross-referencing throughout the document.
+
+
+
+
+
+
+                                 Page 12 of 30
+
+    My Document — Introduction
+
+
+Basic Configuration
+===================
+
+
+        Before  you can format any document, you need to establish the basic
+    parameters  that  will  govern  the  appearance  and  behavior  of  your
+    document.  These  parameters  must be set before the .DOCUMENT directive
+    and affect the entire document.
+
+Document Identification
+-----------------------
+
+
+        Document  identification  parameters establish the basic information
+    that  will appear on the cover page and can be referenced in headers and
+    footers:
+
+    Parameter             Description                     Example                  
+    -------------------------------------------------------------------------------
+    .TITLE                Document title                  .TITLE \                 
+    .AUTH                 Author name                     .AUTH \                  
+    .DATE                 Creation date                   .DATE \                  
+
+
+        These  three  parameters  are optional, but if provided, STROFF will
+
+
+                                 Page 13 of 30
+
+    My Document — Basic Configuration
+
+
+    automatically  generate  an  attractive  cover  page when processing the
+    .DOCUMENT directive. The information is also available through variables
+    for headers and footers.
+
+Page Configuration
+------------------
+
+
+        Page  configuration  parameters  control the physical aspects of the
+    document page:
+
+    Parameter             Description                     Example                  
+    -------------------------------------------------------------------------------
+    .PAGEWIDTH            Page width in characters        .PAGEWIDTH 80            
+    .PAGEHEIGHT           Page height in lines            .PAGEHEIGHT 24           
+    .LMARGIN              Left margin in spaces           .LMARGIN 10              
+    .RMARGIN              Right margin in spaces          .RMARGIN 10              
+
+
+        PAGEWIDTH  determines how wide your lines can be. The default is 80,
+    suitable for most terminals and printers.
+
+        PAGEHEIGHT  controls automatic pagination. If you set PAGEHEIGHT 24,
+    STROFF  will automatically insert page breaks every 24 lines. If you use
+    PAGEHEIGHT  0, it disables automatic pagination and the document will be
+    continuous.
+
+
+                                 Page 14 of 30
+
+    My Document — Basic Configuration
+
+
+
+        The  margins  define  unusable  space  on the sides of the page. The
+    effective text width will be PAGEWIDTH minus LMARGIN minus RMARGIN.
+
+Text Formatting
+---------------
+
+
+        Text  formatting  parameters  control  how  paragraphs and lines are
+    formatted:
+
+    Parameter             Description                     Example                  
+    -------------------------------------------------------------------------------
+    .INDENT               Paragraph indentation           .INDENT 4                
+    .TABSIZE              Tab size in spaces              .TABSIZE 8               
+    .JUSTIFY              Text justification              .JUSTIFY FULL            
+    .LINESPACE            Line spacing                    .LINESPACE 2             
+
+
+        JUSTIFY  accepts  four  values:  LEFT (left alignment), RIGHT (right
+    alignment), CENTER (centered), and FULL (full justification with uniform
+    space distribution).
+
+        An  important  detail  about  INDENT:  only  the  first line of each
+    paragraph  is  indented. Subsequent lines maintain only the left margin.
+    This is the standard behavior in professional typography.
+
+
+                                 Page 15 of 30
+
+    My Document — Basic Configuration
+
+
+
+Headers and Footers
+-------------------
+
+
+        Headers  and  footers  allow  you to add information that repeats on
+    every page:
+
+    Parameter             Description                     Example                  
+    -------------------------------------------------------------------------------
+    .HEADER               Header text                     .HEADER \                
+    .HEADALIGN            Header alignment                .HEADALIGN CENTER        
+    .FOOTER               Footer text                     .FOOTER \                
+    .FOOTALIGN            Footer alignment                .FOOTALIGN RIGHT         
+
+
+        Headers and footers support dynamic variables that are automatically
+    substituted:
+
+        * {TITLE}: Document title
+        * {CHAPTITLE}: Current chapter title
+        * {SUBCHAP}: Current subchapter title
+        * {SUBSUBCHAP}: Current sub-subchapter title
+        * {PAGE}: Current page number
+        * {PAGES}: Total document pages
+
+
+        An  important  detail:  headers only appear on chapter pages, not on
+
+
+                                 Page 16 of 30
+
+    My Document — Basic Configuration
+
+
+    the  title  page  or  index  pages.  This avoids visual contamination on
+    special pages and maintains a professional format.
+
+Document Structure
+==================
+
+
+        Once  basic  parameters  are  configured,  you  must  structure your
+    document  following  the  format  required  by STROFF. This structure is
+    non-negotiable;  it's  how  STROFF  internally  organizes information to
+    produce consistent and professional output.
+
+Document Start and End
+----------------------
+
+
+        Every STROFF document must begin with .DOCUMENT and end with .EDOC:
+
+    My Document — Document Structure
+
+
+                                  My Document
+
+                            Technical Documentation
+
+                                   2025-09-25
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                 Page 17 of 30
+
+
+                                 Page 17 of 30
+
+    My Document — Document Structure
+
+
+
+        1. Marks the official start of processable content
+        2. Automatically generates the title page if information is
+           configured
+        3. Initializes the pagination system if activated
+        4. Prepares the context for processing chapters and sections
+
+
+
+        1. Completes the last page with empty lines if necessary
+        2. Adds the final footer if configured
+        3. Releases internal processor resources
+
+
+Chapters and Hierarchical Structure
+-----------------------------------
+
+
+
+    Command               Description                                       
+    ------------------------------------------------------------------------
+    .CHAP \               title\                                            
+    .SUBCHAP \            title\                                            
+    .SUBSUBCHAP \         title\                                            
+
+
+
+    Command                    Description                                  
+    ------------------------------------------------------------------------
+    .ECHAP                     Close current chapter                        
+    .ESCHAP                    Close current subchapter                     
+    .ESSCHAP                   Close current sub-subchapter                 
+
+
+
+
+
+
+                                 Page 18 of 30
+
+    My Document — Document Structure
+
+
+Automatic Indexes
+-----------------
+
+
+
+    Command               Description                                       
+    ------------------------------------------------------------------------
+    .MAKETOC              Generate table of contents                        
+    .MAKETOT              Generate table of tables                          
+
+
+
+Paragraphs and Text Formatting
+==============================
+
+
+
+Creating Paragraphs
+-------------------
+
+
+
+
+
+
+
+
+
+                                 Page 19 of 30
+
+    My Document — Paragraphs and Text Formatting
+
+
+
+
+
+
+
+
+
+Text Wrapping and Justification
+-------------------------------
+
+
+
+
+
+Line Control
+------------
+
+
+
+    Command                    Description                                  
+    ------------------------------------------------------------------------
+    .BREAK                     Force line break within paragraph            
+
+
+
+
+
+                                 Page 20 of 30
+
+    My Document — Paragraphs and Text Formatting
+
+
+Lists and Structured Content
+============================
+
+
+
+Basic List Syntax
+-----------------
+
+
+
+
+        * First list item
+        * Second list item
+        * Third list item
+
+
+
+
+List Types
+----------
+
+
+
+
+                                 Page 21 of 30
+
+    My Document — Lists and Structured Content
+
+
+
+Bullet Lists
+
+
+
+
+        * First item with bullet
+        * Second item with bullet
+        * Third item with bullet
+
+
+
+
+Numbered Lists
+
+
+
+
+        1. First numbered item
+        2. Second numbered item
+        3. Third numbered item
+
+
+
+
+
+
+
+                                 Page 22 of 30
+
+    My Document — Lists and Structured Content
+
+
+Roman Numeral Lists
+
+
+
+
+        I. First Roman item
+        II. Second Roman item
+        III. Third Roman item
+
+
+
+
+Text Wrapping in Lists
+----------------------
+
+
+
+
+        * This is a very long list item that will automatically wrap to
+          multiple lines while maintaining proper alignment and professional
+          appearance
+        * Another item to demonstrate formatting
+
+
+
+
+
+
+                                 Page 23 of 30
+
+    My Document — Lists and Structured Content
+
+
+Tables and Structured Data
+==========================
+
+
+
+Basic Table Syntax
+------------------
+
+
+
+
+    Header 1                 Header 2                       Header 3
+    ----------------------------------------------------------------
+    Data 1                    Data 2                          Data 3
+    More data                 Center                           Right
+
+
+
+Configuration Parameters
+------------------------
+
+
+
+    Parameter        Description                Example                            
+    -------------------------------------------------------------------------------
+    COLS=n           Number of columns (required)  COLS=3                             
+    WIDTHS=n1,n2,n3  Column widths in characters  WIDTHS=20,15,25                    
+    ALIGNS=L,C,R     Column alignments          ALIGNS=L,C,R                       
+    NAME=\           text\                                                         
+
+
+
+
+        * L: Left alignment (appropriate for text)
+        * C: Center alignment (appropriate for headers or short data)
+
+
+                                 Page 24 of 30
+
+    My Document — Tables and Structured Data
+
+
+        * R: Right alignment (appropriate for numbers)
+
+
+Table Elements
+--------------
+
+
+
+    Command          Description                                            
+    ------------------------------------------------------------------------
+    .TH              Header row with emphasized formatting                  
+    .TR              Regular data row                                       
+    .TLINE           Horizontal separator line                              
+
+
+
+
+Automatic Visual Formatting
+---------------------------
+
+
+
+        * Uniform spacing between columns (2 spaces)
+        * Precise alignment according to specifications (L, C, R)
+        * Headers visually differentiated from content
+        * Optional separators with the .TLINE directive
+
+
+
+
+                                 Page 25 of 30
+
+    My Document — Tables and Structured Data
+
+
+
+
+    Header 1                                    Header 2
+    ----------------------------------------------------
+    Data 1                                       Value 1
+    Data 2                                       Value 2
+    ----------------------------------------------------
+    Total                                            Sum
+
+
+
+
+Code Blocks and Literal Text
+============================
+
+
+
+Code Block Syntax
+-----------------
+
+
+
+
+
+
+
+
+When to Use Code Blocks
+-----------------------
+
+
+
+        * Programming code in any language
+
+
+                                 Page 26 of 30
+
+    My Document — Code Blocks and Literal Text
+
+
+        * Configuration file examples
+        * Command line examples
+        * ASCII art or diagrams
+        * Any text requiring exact formatting preservation
+
+
+
+Page Control and Pagination
+===========================
+
+
+
+Manual Page Control
+-------------------
+
+
+
+    Command               Description                                       
+    ------------------------------------------------------------------------
+    .PAGEBREAK            Force immediate page break                        
+
+
+
+
+
+
+                                 Page 27 of 30
+
+    My Document — Page Control and Pagination
+
+
+Headers and Footers in Pagination
+---------------------------------
+
+
+
+        * Headers appear only on chapter pages, not on title or index pages
+        * Footers appear on all pages if configured
+        * Headers and footers support dynamic variables
+        * Pages are automatically filled to PAGEHEIGHT if configured
+
+
+
+Advanced Variables and Substitution
+===================================
+
+
+
+
+
+
+
+
+                                 Page 28 of 30
+
+    My Document — Advanced Variables and Substitution
+
+
+Available Variables
+-------------------
+
+
+
+    Variable              Description                                       
+    ------------------------------------------------------------------------
+    {TITLE}               Document title as set by .TITLE                   
+    {CHAPTITLE}           Title of current chapter                          
+    {SUBCHAP}             Title of current subchapter                       
+    {SUBSUBCHAP}          Title of current sub-subchapter                   
+    {PAGE}                Current page number                               
+    {PAGES}               Total pages (available after first pass)          
+
+
+
+Using Variables Effectively
+---------------------------
+
+
+
+
+
+
+Best Practices and Workflow
+===========================
+
+
+
+
+
+
+                                 Page 29 of 30
+
+    Best Practices and Workflow / Using Variables Effectively / Roman Numeral Lists
+
+
+Document Planning
+-----------------
+
+
+
+        1. Define the hierarchical structure (chapters, sections)
+        2. Decide on formatting parameters (page width, margins)
+        3. Plan the use of tables, lists, and special elements
+        4. Consider whether you'll need indexes and cross-references
+
+
+
+Development Workflow
+--------------------
+
+
+
+        1. Create the basic structure with parameters and chapters
+        2. Write content focusing on structure over formatting
+        3. Add tables, lists, and special elements as needed
+        4. Configure headers, footers, and indexes
+
+
+                                 Page 30 of 30
+
+    Best Practices and Workflow / Development Workflow / Roman Numeral Lists
+
+
+        5. Review and adjust formatting parameters
+        6. Generate final output and review
+
+
+Version Control
+---------------
+
+
+
+        * Use Git or similar systems to track changes
+        * Commit frequently with descriptive messages
+        * Use branches for major revisions
+        * Tag stable versions for releases
+
+
+Troubleshooting and Common Problems
+===================================
+
+
+
+
+    Problem                              Solution                           
+    ------------------------------------------------------------------------
+    Text doesn't wrap correctly          Check PAGEWIDTH and margins        
+    Headers don't appear                 Verify you're in a chapter, not title/index
+    Page numbers are wrong               Ensure two-pass processing is working
+    Tables don't align                   Check that COLS matches actual columns
+    Missing parameters: .TABLE without specifying COLS  Always specify required parameters 
+
+
+
+
+                                 Page 31 of 30
+
+    Troubleshooting and Common Problems / Version Control / Roman Numeral Lists
+
+
+
+        1. Verify that all commands start with a dot and are on their own
+           line
+        2. Check that quotes are properly closed in parameters
+        3. Ensure parameter values are valid (numbers for numeric
+           parameters)
+        4. Verify that the document structure follows the correct hierarchy
+        5. Make sure .DOCUMENT and .EDOC are present and properly placed
+
+
+
+    Command                    Description                                  
+    ------------------------------------------------------------------------
+    .TITLE \                   text\                                        
+    .AUTH \                    text\                                        
+    .DATE \                    text\                                        
+    .PAGEWIDTH n               Page width in characters                     
+    .PAGEHEIGHT n              Page height in lines                         
+    .LMARGIN n                 Left margin in spaces                        
+    .RMARGIN n                 Right margin in spaces                       
+    .INDENT n                  Paragraph indentation                        
+    .TABSIZE n                 Tab size in spaces                           
+    .JUSTIFY align             Text justification (LEFT|RIGHT|CENTER|FULL)  
+    .LINESPACE n               Line spacing (1=single, 2=double)            
+    .HEADER \                  text\                                        
+    .HEADALIGN align           Header alignment                             
+    .FOOTER \                  text\                                        
+    .FOOTALIGN align           Footer alignment                             
+
+
+    Command                    Description                                  
+    ------------------------------------------------------------------------
+    .DOCUMENT                  Start document                               
+    .EDOC                      End document                                 
+    .CHAP \                    title\                                       
+    .SUBCHAP \                 title\                                       
+    .SUBSUBCHAP \              title\                                       
+    .ECHAP                     Close chapter                                
+    .ESCHAP                    Close subchapter                             
+    .ESSCHAP                   Close sub-subchapter                         
+
+
+    Command                    Description                                  
+    ------------------------------------------------------------------------
+    .P [align]                 New paragraph                                
+    .BREAK                     Line break                                   
+    .PAGEBREAK                 Page break                                   
+    .MAKETOC                   Generate table of contents                   
+    .MAKETOT                   Generate table of tables                     
+    .LIST params               Start list                                   
+    .ITEM \                    text\                                        
+    .ELIST                     End list                                     
+    .CODE                      Start code block                             
+    .ECODE                     End code block                               
+    .TABLE parameters          Start table                                  
+    .TH                        Table headers                                
+    .TR                        Table row                                    
+    .TLINE                     Table separator line                         
+    .ETABLE                    End table                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                 Page 32 of 30
