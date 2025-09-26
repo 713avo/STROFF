@@ -1,0 +1,25 @@
+# STROFF Project - Git Ignore File
+
+# Build artifacts
+bin/
+*.o
+*.tmp
+
+# IDE and editor files
+.vscode/
+.idea/
+*~
+*.swp
+*.swo
+
+# Claude Code files (development only)
+CLAUDE.md
+.claude/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Test files
+test*.trf
+test*.txt
