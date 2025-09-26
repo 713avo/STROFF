@@ -315,7 +315,7 @@ void output_toc(stroff_context_t *ctx) {
 
         // Estrategia de posición fija: números siempre en la misma columna
         int content_width = ctx->params.page_width - ctx->params.left_margin - ctx->params.right_margin;
-        int title_width = strlen(ctx->chapters[i].title) + (ctx->chapters[i].level - 1) * 2;
+        int title_width = utf8_display_width(ctx->chapters[i].title) + (ctx->chapters[i].level - 1) * 2;
 
         // Posición fija para números: 4 caracteres desde el final (espacio para números hasta 999)
         int number_field_width = 4;  // "  99" o " 123"

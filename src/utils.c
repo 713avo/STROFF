@@ -56,3 +56,33 @@ align_t parse_align(const char *align_str) {
     }
     return ALIGN_LEFT;
 }
+
+int utf8_display_width(const char *str) {
+    int width = 0;
+    const unsigned char *s = (const unsigned char *)str;
+
+    while (*s) {
+        if (*s < 0x80) {
+            // ASCII character (1 byte)
+            s++;
+            width++;
+        } else if (*s < 0xC0) {
+            // Invalid UTF-8 continuation byte, skip
+            s++;
+        } else if (*s < 0xE0) {
+            // 2-byte UTF-8 character
+            s += 2;
+            width++;
+        } else if (*s < 0xF0) {
+            // 3-byte UTF-8 character
+            s += 3;
+            width++;
+        } else {
+            // 4-byte UTF-8 character
+            s += 4;
+            width++;
+        }
+    }
+
+    return width;
+}

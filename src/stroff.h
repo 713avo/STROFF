@@ -120,6 +120,7 @@ char *trim_whitespace(char *str);
 char *extract_string_param(const char *line, const char *param);
 int extract_int_param(const char *line, const char *param);
 align_t parse_align(const char *align_str);
+int utf8_display_width(const char *str);
 void substitute_variables(stroff_context_t *ctx, char *text);
 
 #endif

@@ -50,68 +50,68 @@
 TABLA DE CONTENIDOS
 ==================
 
-    Introducción a STROFF..............................................   3
+    Introducción a STROFF...............................................   3
       Historia y Contexto...............................................   4
-      ¿Por qué usar STROFF?...........................................   5
+      ¿Por qué usar STROFF?.............................................   5
     Conceptos Fundamentales.............................................   6
       Directivas y Comandos.............................................   7
-    Introducción.......................................................   7
-      Estructura Jerárquica............................................   8
+    Introducción........................................................   7
+      Estructura Jerárquica.............................................   8
       Sistema de Dos Pasadas............................................   9
-    Configuración Básica..............................................  10
-      Información del Documento........................................  11
-      Configuración de Página.........................................  11
+    Configuración Básica................................................  10
+      Información del Documento.........................................  11
+      Configuración de Página...........................................  11
       Formato de Texto..................................................  12
       Headers y Footers.................................................  13
     Estructura del Documento............................................  15
       Inicio y Fin del Documento........................................  15
-      Capítulos y Secciones............................................  16
+      Capítulos y Secciones.............................................  16
 
 
 
                                 Página 3 de 33
 
-      Generación de Índices...........................................  17
-    Párrafos y Formato de Texto........................................  17
-      Creación y Manejo de Párrafos...................................  18
-      Justificación y Alineación......................................  18
-      Control Avanzado de Líneas.......................................  19
+      Generación de Índices.............................................  17
+    Párrafos y Formato de Texto.........................................  17
+      Creación y Manejo de Párrafos.....................................  18
+      Justificación y Alineación........................................  18
+      Control Avanzado de Líneas........................................  19
     Listas y Enumeraciones..............................................  20
-      Sintaxis Básica de Listas........................................  20
+      Sintaxis Básica de Listas.........................................  20
       Tipos de Listas Disponibles.......................................  21
-        Listas con Viñetas (BULLET)....................................  21
+        Listas con Viñetas (BULLET).....................................  21
         Listas Numeradas (NUMBER).......................................  21
-        Listas con Números Romanos (RNUMBER)...........................  22
-      Anidación y Listas Complejas.....................................  23
+        Listas con Números Romanos (RNUMBER)............................  22
+      Anidación y Listas Complejas......................................  23
     Tablas y Datos Estructurados........................................  23
-      Sintaxis Básica de Tablas........................................  24
-      Parámetros de Configuración.....................................  24
+      Sintaxis Básica de Tablas.........................................  24
+      Parámetros de Configuración.......................................  24
       Elementos de Tabla................................................  25
-      Formato Visual Automático........................................  25
-    Bloques de Código y Texto Literal..................................  26
-      Sintaxis de Bloques de Código....................................  26
+      Formato Visual Automático.........................................  25
+    Bloques de Código y Texto Literal...................................  26
+      Sintaxis de Bloques de Código.....................................  26
 
 
 
                                 Página 4 de 33
 
-      Características de los Bloques de Código........................  26
+      Características de los Bloques de Código..........................  26
     Funciones Avanzadas.................................................  27
       Variables en Headers y Footers....................................  27
-      Control de Paginación............................................  28
-    Flujo de Trabajo y Mejores Prácticas...............................  28
-      Organización del Documento.......................................  28
+      Control de Paginación.............................................  28
+    Flujo de Trabajo y Mejores Prácticas................................  28
+      Organización del Documento........................................  28
       Control de Versiones..............................................  29
-      Automatización y Scripts.........................................  30
-    Solución de Problemas Comunes......................................  30
+      Automatización y Scripts..........................................  30
+    Solución de Problemas Comunes.......................................  30
       Problemas de Formato..............................................  30
       Errores de Sintaxis...............................................  30
       Problemas de Rendimiento..........................................  31
-    Referencia Rápida..................................................  32
-      Configuración Global.............................................  32
+    Referencia Rápida...................................................  32
+      Configuración Global..............................................  32
       Estructura........................................................  32
       Contenido.........................................................  32
-    Conclusión.........................................................  33
+    Conclusión..........................................................  33
 
 
 
