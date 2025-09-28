@@ -650,6 +650,29 @@ Here are some effective patterns for using variables:
 .P
 Variables that are empty (like {SUBCHAP} when not in a subchapter) are simply omitted from the output, avoiding awkward blank spaces.
 
+.SUBCHAP "Modular Documents with .INCLUDE"
+
+.P
+The .INCLUDE directive lets you split large documents into multiple STROFF files and assemble them automatically during processing. This is perfect for books, multilingual manuals, or any workflow where chapters live in dedicated directories.
+
+.CODE
+.INCLUDE "chapters/introduction.str"
+.INCLUDE "../appendices/references.str"
+.ECODE
+
+.P
+Each relative path is resolved against the file that issues the directive, so every chapter can keep its own local includes without worrying about where the main document resides.
+
+.LIST TYPE=BULLET CHAR=» INDENT=4
+.ITEM "Up to 16 nested includes are supported to guard against infinite recursion."
+.ITEM "Included files may contain any directive, including additional .INCLUDE commands."
+.ITEM "Formatting context (lists, tables, paragraphs) continues seamlessly across includes."
+.ITEM "Store shared snippets under directories like `chapters/` or `shared/` to keep things organised."
+.ELIST
+
+.P
+To avoid circular dependencies, design a clear include hierarchy and limit cross-inclusions between sibling files. When reusing content across different manuals, keep common building blocks in a dedicated `shared/` folder.
+
 .CHAP "Best Practices and Workflow"
 
 .P

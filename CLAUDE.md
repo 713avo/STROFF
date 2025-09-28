@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-STROFF is a document formatting language and processor inspired by classic RUNOFF and ROFF systems. It processes markup files (`.trf`) and generates formatted plain text documents (`.txt`) using a two-pass system for automatic table of contents and cross-references.
+STROFF is a document formatting language and processor inspired by classic RUNOFF and ROFF systems. It processes markup files (`.str`, legacy `.trf`) and generates formatted plain text documents (`.txt`) using a two-pass system for automatic table of contents and cross-references.
 
 ## Architecture
 
@@ -33,12 +33,12 @@ gcc src/*.c -o bin/stroff
 
 ### Usage
 ```bash
-./bin/stroff input.trf output.txt
+./bin/stroff input.str output.txt
 ```
 
 ### Testing with Sample Document
 ```bash
-./bin/stroff MANUAL.TRF MANUAL.TXT
+./bin/stroff MANUAL.STR MANUAL.TXT
 ```
 
 ## Document Format
@@ -47,6 +47,7 @@ STROFF uses markup directives starting with `.` (dot commands):
 
 - **Document setup**: `.TITLE`, `.AUTH`, `.DATE`, `.PAGEWIDTH`, `.LMARGIN`, etc.
 - **Structure**: `.DOCUMENT`/`.EDOC`, `.CHAP`/`.ECHAP`, `.SUBCHAP`, `.SUBSUBCHAP`
+- **File inclusion**: `.INCLUDE "path"` (relative to the file where it appears)
 - **Content**: `.P` (paragraphs), `.LIST`/`.ELIST`, `.TABLE`/`.ETABLE`, `.CODE`/`.ECODE`
 - **Layout**: `.PAGEBREAK`, `.MAKETOC` (table of contents), `.MAKETOT` (table of tables)
 
@@ -58,10 +59,11 @@ STROFF uses markup directives starting with `.` (dot commands):
 - **Dynamic indexing**: Automatic table of contents and table index generation
 - **Complex tables**: Multi-column tables with configurable widths and alignments
 - **Hierarchical structure**: Three levels of chapters with automatic numbering
+- **Modular authoring**: Include reusable sections with `.INCLUDE` and nested relative paths
 
 ## File Extensions
 
-- `.trf`: STROFF markup source files
+- `.str` (legacy `.trf`): STROFF markup source files
 - `.txt`: Generated formatted text output
 - `.c/.h`: C source and header files
 - `.o`: Compiled object files (in `bin/`)

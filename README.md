@@ -11,6 +11,7 @@ STROFF is a powerful document formatting system inspired by classic RUNOFF and R
 - **📋 Rich Content Elements**: Support for clean tables with optional separators, lists, code blocks, and hierarchical chapters
 - **🔧 Variable Substitution**: Dynamic headers and footers with document variables
 - **📖 Two-Pass Processing**: First pass collects references, second pass generates final output
+- **🧩 Modular Documents**: Reuse shared sections with `.INCLUDE` directives resolved relative to each source file
 
 ## Quick Start
 
@@ -23,12 +24,12 @@ gcc src/*.c -o bin/stroff
 ### Usage
 
 ```bash
-./bin/stroff input.trf output.txt
+./bin/stroff input.str output.txt
 ```
 
 ### Example Document
 
-Create a file `example.trf`:
+Create a file `example.str`:
 
 ```
 .TITLE "My Document"
@@ -60,7 +61,7 @@ details for you.
 Then process it:
 
 ```bash
-./bin/stroff example.trf example.txt
+./bin/stroff example.str example.txt
 ```
 
 ## Document Structure
@@ -150,6 +151,13 @@ function example() {
 .ECODE
 ```
 
+### Includes
+```
+.INCLUDE "chapters/introduction.str"   # Inserts another STROFF source file
+```
+
+Include paths are resolved relative to the file that issues the directive, which makes it easy to split large manuals into reusable `.str` snippets.
+
 ## Variables
 
 Use these variables in headers and footers:
@@ -178,7 +186,7 @@ Example:
 │   ├── utils.c        # Utility functions
 │   └── stroff.h       # Header definitions
 ├── bin/               # Compiled binaries and object files
-├── MANUAL.TRF         # Complete manual in STROFF format
+├── MANUAL.STR         # Complete manual in STROFF format
 └── STROFF.md          # Language specification
 ```
 
@@ -189,7 +197,7 @@ Example:
 
 ## File Extensions
 
-- `.trf` - STROFF markup source files
+- `.str` (or legacy `.trf`) - STROFF markup source files
 - `.txt` - Generated formatted text output
 
 ## Limits
@@ -204,7 +212,7 @@ Example:
 
 The repository includes comprehensive examples:
 
-- `MANUAL.TRF` - Complete user manual demonstrating all features
+- `MANUAL.STR` - Complete user manual demonstrating all features
 - `STROFF.md` - Language specification and reference
 
 ## Contributing
@@ -212,7 +220,7 @@ The repository includes comprehensive examples:
 This project implements a complete document formatting language. When contributing:
 
 1. Follow the existing C code style
-2. Test with the included `MANUAL.TRF` example
+2. Test with the included `MANUAL.STR` example
 3. Update documentation for new features
 4. Ensure backward compatibility
 

@@ -650,6 +650,29 @@ Además de la paginación automática, STROFF ofrece control manual:
 .P
 Los saltos de página manuales son útiles para controlar exactamente dónde terminan las secciones, asegurar que tablas grandes aparezcan completas en una página, o crear páginas especiales como portadas de capítulos.
 
+.SUBCHAP "Documentos Modulares con .INCLUDE"
+
+.P
+La directiva .INCLUDE permite dividir un documento grande en múltiples archivos STROFF y combinarlos automáticamente durante el procesamiento. Es ideal para manuales extensos, colecciones de capítulos reutilizables o anexos compartidos entre diferentes publicaciones.
+
+.CODE
+.INCLUDE "capitulos/introduccion.str"
+.INCLUDE "../anexos/referencias.str"
+.ECODE
+
+.P
+Las rutas relativas se resuelven con respecto al archivo que contiene la directiva. Esto significa que cada capítulo puede incluir sus propios fragmentos locales sin preocuparse por la ubicación del documento principal.
+
+.LIST TYPE=BULLET CHAR=» INDENT=4
+.ITEM "Profundidad máxima de 16 inclusiones anidadas para evitar bucles infinitos."
+.ITEM "Los archivos incluidos pueden contener cualquier directiva válida, incluyendo más .INCLUDE."
+.ITEM "El contexto (capítulos, listas, tablas) continúa donde quedó, permitiendo dividir secciones sin romper el formato."
+.ITEM "Es buena práctica almacenar capítulos en carpetas dedicadas como `capitulos/` o `secciones/`."
+.ELIST
+
+.P
+Para evitar dependencias circulares, planifique la jerarquía de archivos y limite las inclusiones recíprocas. Si necesita reutilizar contenido en múltiples documentos, considere mantener un directorio `shared/` con fragmentos independientes.
+
 .CHAP "Flujo de Trabajo y Mejores Prácticas"
 
 .P
@@ -673,7 +696,7 @@ Estructure sus documentos STROFF de manera lógica y consistente:
 Los documentos STROFF son perfectos para control de versiones:
 
 .LIST TYPE=BULLET CHAR=✓ INDENT=4
-.ITEM "Use Git o sistemas similares para versionar sus documentos fuente .TRF"
+.ITEM "Use Git o sistemas similares para versionar sus documentos fuente .STR"
 .ITEM "Incluya la salida .TXT en el repositorio para referencias rápidas"
 .ITEM "Documente cambios importantes en commits descriptivos"
 .ITEM "Use branches para experimentos de formato sin afectar la versión principal"
@@ -687,8 +710,8 @@ STROFF se integra perfectamente en sistemas automatizados:
 .CODE
 #!/bin/bash
 # Script de generación automática de documentos
-for archivo in *.TRF; do
-    salida="${archivo%.TRF}.TXT"
+for archivo in *.STR; do
+    salida="${archivo%.STR}.TXT"
     echo "Procesando $archivo -> $salida"
     ./stroff "$archivo" "$salida"
 done

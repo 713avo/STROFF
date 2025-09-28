@@ -1,5 +1,92 @@
 #include "stroff.h"
 
+static int is_absolute_path(const char *path) {
+    if (!path || !path[0]) {
+        return 0;
+    }
+
+#ifdef _WIN32
+    if (path[0] == '\\' || path[0] == '/') {
+        return 1;
+    }
+    if (strlen(path) > 1 && path[1] == ':') {
+        return 1;
+    }
+    return 0;
+#else
+    return path[0] == '/';
+#endif
+}
+
+static void join_paths(const char *base, const char *relative, char *out) {
+    if (!base || !base[0]) {
+        strncpy(out, relative, MAX_PATH_LENGTH - 1);
+        out[MAX_PATH_LENGTH - 1] = '\0';
+        return;
+    }
+
+    size_t base_len = strlen(base);
+    int has_separator = base_len > 0 && (base[base_len - 1] == '/' || base[base_len - 1] == '\\');
+    if (has_separator) {
+        snprintf(out, MAX_PATH_LENGTH, "%s%s", base, relative);
+    } else {
+        snprintf(out, MAX_PATH_LENGTH, "%s/%s", base, relative);
+    }
+}
+
+static void get_directory(const char *path, char *dir_out) {
+    if (!path || !path[0]) {
+        dir_out[0] = '\0';
+        return;
+    }
+
+    const char *last_sep = NULL;
+    for (const char *p = path; *p; p++) {
+        if (*p == '/' || *p == '\\') {
+            last_sep = p;
+        }
+    }
+
+    if (!last_sep) {
+        dir_out[0] = '\0';
+        return;
+    }
+
+    size_t dir_len = (size_t)(last_sep - path);
+
+    if (dir_len == 0) {
+        dir_out[0] = *last_sep;
+        dir_out[1] = '\0';
+        return;
+    }
+
+    if (dir_len >= MAX_PATH_LENGTH) {
+        dir_len = MAX_PATH_LENGTH - 1;
+    }
+
+    strncpy(dir_out, path, dir_len);
+    dir_out[dir_len] = '\0';
+}
+
+static void resolve_include_path(stroff_context_t *ctx, const char *filename, char *resolved) {
+    if (is_absolute_path(filename)) {
+        strncpy(resolved, filename, MAX_PATH_LENGTH - 1);
+        resolved[MAX_PATH_LENGTH - 1] = '\0';
+        return;
+    }
+
+    if (ctx->include_depth > 0) {
+        const char *base = ctx->include_stack[ctx->include_depth - 1];
+        if (base[0]) {
+            join_paths(base, filename, resolved);
+            return;
+        }
+    }
+
+    strncpy(resolved, filename, MAX_PATH_LENGTH - 1);
+    resolved[MAX_PATH_LENGTH - 1] = '\0';
+}
+
 void init_context(stroff_context_t *ctx) {
     strcpy(ctx->params.title, "");
     strcpy(ctx->params.author, "");
@@ -36,14 +123,33 @@ void init_context(stroff_context_t *ctx) {
     ctx->current_paragraph_align = ALIGN_LEFT;
     ctx->first_line_of_paragraph = 0;
     ctx->output = NULL;
+    ctx->include_depth = 0;
+    for (int i = 0; i < MAX_INCLUDE_DEPTH; i++) {
+        ctx->include_stack[i][0] = '\0';
+    }
 }
 
 void process_file(stroff_context_t *ctx, const char *filename) {
-    FILE *file = fopen(filename, "r");
+    char resolved_path[MAX_PATH_LENGTH];
+    resolve_include_path(ctx, filename, resolved_path);
+
+    FILE *file = fopen(resolved_path, "r");
     if (!file) {
-        fprintf(stderr, "Error: No se puede abrir el archivo '%s'\n", filename);
+        fprintf(stderr, "Error: No se puede abrir el archivo '%s'\n", resolved_path);
         return;
     }
+
+    if (ctx->include_depth >= MAX_INCLUDE_DEPTH) {
+        fprintf(stderr, "Error: Límite de inclusión excedido (%d niveles)\n", MAX_INCLUDE_DEPTH);
+        fclose(file);
+        return;
+    }
+
+    char current_dir[MAX_PATH_LENGTH];
+    get_directory(resolved_path, current_dir);
+    strncpy(ctx->include_stack[ctx->include_depth], current_dir, MAX_PATH_LENGTH - 1);
+    ctx->include_stack[ctx->include_depth][MAX_PATH_LENGTH - 1] = '\0';
+    ctx->include_depth++;
 
     char line[MAX_LINE_LENGTH];
     while (fgets(line, sizeof(line), file)) {
@@ -51,11 +157,22 @@ void process_file(stroff_context_t *ctx, const char *filename) {
         process_line(ctx, line);
     }
 
+    ctx->include_depth--;
+    ctx->include_stack[ctx->include_depth][0] = '\0';
     fclose(file);
 }
 
 void process_line(stroff_context_t *ctx, const char *line) {
-    char *trimmed = trim_whitespace((char*)line);
+    char working[MAX_LINE_LENGTH];
+    strncpy(working, line, MAX_LINE_LENGTH - 1);
+    working[MAX_LINE_LENGTH - 1] = '\0';
+
+    char *trimmed = trim_whitespace(working);
+
+    if (ctx->in_code_block && strcmp(trimmed, ".ECODE") != 0) {
+        process_text(ctx, line);
+        return;
+    }
 
     if (strlen(trimmed) == 0) {
         return;

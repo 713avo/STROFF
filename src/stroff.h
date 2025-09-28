@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#define MAX_PATH_LENGTH 512
+#define MAX_INCLUDE_DEPTH 16
+
 #define MAX_LINE_LENGTH 1024
 #define MAX_TITLE_LENGTH 256
 #define MAX_COMMAND_LENGTH 64
@@ -100,6 +103,8 @@ typedef struct {
     align_t current_paragraph_align;
     int first_line_of_paragraph;
     FILE *output;
+    char include_stack[MAX_INCLUDE_DEPTH][MAX_PATH_LENGTH];
+    int include_depth;
 } stroff_context_t;
 
 void init_context(stroff_context_t *ctx);

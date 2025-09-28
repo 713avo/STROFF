@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        fprintf(stderr, "Uso: %s <archivo.trf> <archivo.txt>\n", argv[0]);
+        fprintf(stderr, "Uso: %s <archivo.str> <archivo.txt>\n", argv[0]);
         return 1;
     }
 
@@ -43,6 +43,10 @@ int main(int argc, char *argv[]) {
     strcpy(ctx.current_chapter, "");
     strcpy(ctx.current_subchap, "");
     strcpy(ctx.current_subsubchap, "");
+    ctx.include_depth = 0;
+    for (int i = 0; i < MAX_INCLUDE_DEPTH; i++) {
+        ctx.include_stack[i][0] = '\0';
+    }
     // NOTA: NO reinicializar ctx.total_pages - mantiene el valor de la primera pasada
 
     process_file(&ctx, argv[1]);

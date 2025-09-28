@@ -20,7 +20,7 @@
 
 
 
-                                  Page 1 of 30
+                                  Page 1 of 38
 
 
 
@@ -44,7 +44,7 @@
 
 
 
-                                  Page 2 of 30
+                                  Page 2 of 38
 
 
 TABLA DE CONTENIDOS
@@ -55,10 +55,9 @@ TABLA DE CONTENIDOS
       Why Use STROFF?...................................................   5
     Fundamental Concepts................................................   6
       Directives and Commands...........................................   7
-    Introduction........................................................   7
-      Hierarchical Structure............................................   8
-      Two-Pass Processing...............................................   9
-    Basic Configuration.................................................  10
+      Hierarchical Structure............................................   7
+      Two-Pass Processing...............................................   8
+    Basic Configuration.................................................   9
       Document Identification...........................................  10
       Page Configuration................................................  11
       Text Formatting...................................................  12
@@ -66,58 +65,59 @@ TABLA DE CONTENIDOS
     Document Structure..................................................  14
       Document Start and End............................................  14
       Chapters and Hierarchical Structure...............................  15
-
-
-
-                                  Page 3 of 30
-
       Automatic Indexes.................................................  16
-    Paragraphs and Text Formatting......................................  16
-      Creating Paragraphs...............................................  16
-      Text Wrapping and Justification...................................  17
-      Line Control......................................................  17
-    Lists and Structured Content........................................  18
-      Basic List Syntax.................................................  18
-      List Types........................................................  18
-        Bullet Lists....................................................  19
-        Numbered Lists..................................................  19
-        Roman Numeral Lists.............................................  20
-      Text Wrapping in Lists............................................  20
-    Tables and Structured Data..........................................  21
-      Basic Table Syntax................................................  21
-      Configuration Parameters..........................................  21
-      Table Elements....................................................  22
-      Automatic Visual Formatting.......................................  22
-    Code Blocks and Literal Text........................................  23
-      Code Block Syntax.................................................  23
 
 
 
-                                  Page 4 of 30
+                                  Page 3 of 38
 
-      When to Use Code Blocks...........................................  23
-    Page Control and Pagination.........................................  24
-      Manual Page Control...............................................  24
-      Headers and Footers in Pagination.................................  25
-    Advanced Variables and Substitution.................................  25
-      Available Variables...............................................  26
-      Using Variables Effectively.......................................  26
-    Best Practices and Workflow.........................................  26
-      Document Planning.................................................  27
-      Development Workflow..............................................  27
-      Version Control...................................................  28
-    Troubleshooting and Common Problems.................................  28
-      Common Errors.....................................................  29
-      Debugging Tips....................................................  29
-    Complete Command Reference..........................................  30
-      Configuration Commands............................................  30
-      Structure Commands................................................  30
-      Content Commands..................................................  30
+    Paragraphs and Text Formatting......................................  17
+      Creating Paragraphs...............................................  17
+      Text Wrapping and Justification...................................  18
+      Line Control......................................................  19
+    Lists and Structured Content........................................  19
+      Basic List Syntax.................................................  20
+      List Types........................................................  20
+        Bullet Lists....................................................  21
+        Numbered Lists..................................................  21
+        Roman Numeral Lists.............................................  22
+      Text Wrapping in Lists............................................  22
+    Tables and Structured Data..........................................  23
+      Basic Table Syntax................................................  23
+      Configuration Parameters..........................................  24
+      Table Elements....................................................  25
+      Automatic Visual Formatting.......................................  26
+    Code Blocks and Literal Text........................................  27
+      Code Block Syntax.................................................  27
+      When to Use Code Blocks...........................................  28
+
+
+
+                                  Page 4 of 38
+
+    Page Control and Pagination.........................................  28
+      Manual Page Control...............................................  29
+      Headers and Footers in Pagination.................................  29
+    Advanced Variables and Substitution.................................  30
+      Available Variables...............................................  31
+      Using Variables Effectively.......................................  31
+      Modular Documents with .INCLUDE...................................  32
+    Best Practices and Workflow.........................................  33
+      Document Planning.................................................  34
+      Development Workflow..............................................  34
+      Version Control...................................................  35
+    Troubleshooting and Common Problems.................................  36
+      Common Errors.....................................................  36
+      Debugging Tips....................................................  36
+    Complete Command Reference..........................................  37
+      Configuration Commands............................................  38
+      Structure Commands................................................  38
+      Content Commands..................................................  38
 
 
 
 
-                                  Page 5 of 30
+                                  Page 5 of 38
 
 
 Introduction to STROFF
@@ -141,7 +141,7 @@ Introduction to STROFF
     control  over  formatting,  especially  useful  for technical documents,
 
 
-                                  Page 6 of 30
+                                  Page 6 of 38
 
     Complete STROFF Manual — Introduction to STROFF
 
@@ -166,7 +166,7 @@ History and Context
     but  with  clearer  syntax  and  modern  features  like  automatic  full
 
 
-                                  Page 7 of 30
+                                  Page 7 of 38
 
     Complete STROFF Manual — Introduction to STROFF
 
@@ -192,7 +192,7 @@ Why Use STROFF?
             control systems.
 
 
-                                  Page 8 of 30
+                                  Page 8 of 38
 
     Complete STROFF Manual — Introduction to STROFF
 
@@ -218,7 +218,7 @@ Fundamental Concepts
 
 
 
-                                  Page 9 of 30
+                                  Page 9 of 38
 
     Complete STROFF Manual — Fundamental Concepts
 
@@ -231,10 +231,9 @@ Directives and Commands
     "commands." These always begin with a dot (.) at the start of a line and
     are followed by the command name and its parameters. For example:
 
-
-Introduction
-============
-
+    .PAGEWIDTH 80
+    .TITLE "My Document"
+    .CHAP "Introduction"
 
 
         It's crucial to understand that directives don't appear in the final
@@ -242,19 +241,18 @@ Introduction
     (lines  that  don't  start  with  a  dot) appears in the final document,
     formatted according to the surrounding directives.
 
-
-
-
-                                 Page 10 of 30
-
-    My Document — Introduction
-
-
 Hierarchical Structure
 ----------------------
 
 
         STROFF   documents   follow  a  clear  and  predefined  hierarchical
+
+
+                                 Page 10 of 38
+
+    Complete STROFF Manual — Fundamental Concepts
+
+
     structure:
 
         1.  Global configuration: Parameters that affect the entire
@@ -271,15 +269,15 @@ Hierarchical Structure
     Understanding and respecting this hierarchy is fundamental for effective
     STROFF usage.
 
-
-                                 Page 11 of 30
-
-    My Document — Introduction
-
-
-
 Two-Pass Processing
 -------------------
+
+
+
+
+                                 Page 11 of 38
+
+    Complete STROFF Manual — Fundamental Concepts
 
 
         One  of  STROFF's most important features is its two-pass processing
@@ -295,15 +293,6 @@ Two-Pass Processing
     correct   page   numbers,  total  page  count  in  headers/footers,  and
     consistent cross-referencing throughout the document.
 
-
-
-
-
-                                 Page 12 of 30
-
-    My Document — Introduction
-
-
 Basic Configuration
 ===================
 
@@ -311,6 +300,13 @@ Basic Configuration
         Before  you can format any document, you need to establish the basic
     parameters  that  will  govern  the  appearance  and  behavior  of  your
     document.  These  parameters  must be set before the .DOCUMENT directive
+
+
+                                 Page 12 of 38
+
+    Complete STROFF Manual — Basic Configuration
+
+
     and affect the entire document.
 
 Document Identification
@@ -329,16 +325,19 @@ Document Identification
 
 
         These  three  parameters  are optional, but if provided, STROFF will
-
-
-                                 Page 13 of 30
-
-    My Document — Basic Configuration
-
-
     automatically  generate  an  attractive  cover  page when processing the
     .DOCUMENT directive. The information is also available through variables
     for headers and footers.
+
+
+
+
+
+
+                                 Page 13 of 38
+
+    Complete STROFF Manual — Basic Configuration
+
 
 Page Configuration
 ------------------
@@ -363,15 +362,15 @@ Page Configuration
     PAGEHEIGHT  0, it disables automatic pagination and the document will be
     continuous.
 
-
-                                 Page 14 of 30
-
-    My Document — Basic Configuration
-
-
-
         The  margins  define  unusable  space  on the sides of the page. The
     effective text width will be PAGEWIDTH minus LMARGIN minus RMARGIN.
+
+
+
+                                 Page 14 of 38
+
+    Complete STROFF Manual — Basic Configuration
+
 
 Text Formatting
 ---------------
@@ -397,10 +396,13 @@ Text Formatting
     This is the standard behavior in professional typography.
 
 
-                                 Page 15 of 30
 
-    My Document — Basic Configuration
 
+
+
+                                 Page 15 of 38
+
+    Complete STROFF Manual — Basic Configuration
 
 
 Headers and Footers
@@ -430,14 +432,14 @@ Headers and Footers
 
 
         An  important  detail:  headers only appear on chapter pages, not on
-
-
-                                 Page 16 of 30
-
-    My Document — Basic Configuration
-
-
     the  title  page  or  index  pages.  This avoids visual contamination on
+
+
+                                 Page 16 of 38
+
+    Complete STROFF Manual — Basic Configuration
+
+
     special pages and maintains a professional format.
 
 Document Structure
@@ -455,35 +457,22 @@ Document Start and End
 
         Every STROFF document must begin with .DOCUMENT and end with .EDOC:
 
-    My Document — Document Structure
+    # Parameter configuration
+    .TITLE "My Document"
+    .PAGEWIDTH 80
+    # ... more parameters ...
+    
+    .DOCUMENT
+    # All content goes here
+    .EDOC
 
 
-                                  My Document
-
-                            Technical Documentation
-
-                                   2025-09-25
+        The .DOCUMENT directive does several important things:
 
 
+                                 Page 17 of 38
 
-
-
-
-
-
-
-
-
-
-
-
-
-                                 Page 17 of 30
-
-
-                                 Page 17 of 30
-
-    My Document — Document Structure
+    Complete STROFF Manual — Document Structure
 
 
 
@@ -494,6 +483,8 @@ Document Start and End
         4.  Prepares the context for processing chapters and sections
 
 
+        The  .EDOC  directive  closes the document and performs finalization
+    tasks:
 
         1.  Completes the last page with empty lines if necessary
         2.  Adds the final footer if configured
@@ -504,6 +495,15 @@ Chapters and Hierarchical Structure
 -----------------------------------
 
 
+        STROFF  supports a three-level hierarchical structure for organizing
+    content:
+
+
+                                 Page 18 of 38
+
+    Complete STROFF Manual — Document Structure
+
+
 
     Command               Description                                       
     ------------------------------------------------------------------------
@@ -512,6 +512,7 @@ Chapters and Hierarchical Structure
     .SUBSUBCHAP \         title\                                            
 
 
+        Additionally, you can explicitly close sections:
 
     Command                    Description                                  
     ------------------------------------------------------------------------
@@ -520,19 +521,14 @@ Chapters and Hierarchical Structure
     .ESSCHAP                   Close current sub-subchapter                 
 
 
-
-
-
-
-                                 Page 18 of 30
-
-    My Document — Document Structure
-
+        These  closing  commands  are  optional; STROFF automatically closes
+    sections when a new section of equal or higher level is opened.
 
 Automatic Indexes
 -----------------
 
 
+        STROFF can automatically generate two types of indexes:
 
     Command               Description                                       
     ------------------------------------------------------------------------
@@ -540,177 +536,270 @@ Automatic Indexes
     .MAKETOT              Generate table of tables                          
 
 
+        These commands should be placed immediately after .DOCUMENT, usually
+    followed  by  .PAGEBREAK to separate them from main content. The indexes
+    are  generated  using  the  two-pass  system,  so  page  numbers will be
+    correct.
+
+
+
+
+                                 Page 19 of 38
+
+    Complete STROFF Manual — Document Structure
+
 
 Paragraphs and Text Formatting
 ==============================
 
 
+        Paragraphs  are  the  basic unit of content in STROFF. Understanding
+    how  they  work  and  how  to  control them effectively is essential for
+    creating well-formatted documents.
 
 Creating Paragraphs
 -------------------
 
 
+        The basic command for creating paragraphs is .P:
+
+    .P
+    This is a paragraph that will be automatically wrapped and formatted
+    according to the configured page width and justification settings.
+    
+    .P
+    This is another paragraph. Note that there can be blank lines
+    between paragraphs in the source, but STROFF handles spacing
+    automatically according to its internal rules.
+
+
+        Each  .P  command creates a new paragraph with the global formatting
+    configured  in  the  document  parameters. However, you can also specify
+    specific alignment for individual paragraphs:
+
+    .P LEFT
+    This paragraph will be left-aligned regardless of global justification.
+    
+    .P CENTER
+    This paragraph will be centered on the page.
+    
+    .P RIGHT
+    This paragraph will be right-aligned.
+    
+    .P FULL
+    This paragraph will be fully justified with uniform space distribution.
 
 
 
 
+                                 Page 20 of 38
 
-
-
-                                 Page 19 of 30
-
-    My Document — Paragraphs and Text Formatting
-
-
-
-
-
-
-
+    Complete STROFF Manual — Paragraphs and Text Formatting
 
 
 Text Wrapping and Justification
 -------------------------------
 
 
+        STROFF  automatically  handles text wrapping, which means long lines
+    are  divided  into  multiple  lines  that fit within the configured page
+    width. The wrapping process is intelligent and respects word boundaries.
 
+        The  effective  width  for  text  is  calculated as: PAGEWIDTH minus
+    LMARGIN  minus  RMARGIN  minus  INDENT  (for  the  first line only). For
+    example,  with  PAGEWIDTH  80, LMARGIN 10, RMARGIN 10, and INDENT 4, the
+    first  line of a paragraph has 56 characters available, while subsequent
+    lines have 60 characters.
+
+        Full  justification  (JUSTIFY  FULL)  distributes  spaces  uniformly
+    between  words  to achieve straight right margins. The last line of each
+    paragraph is left-aligned, following standard typographic conventions.
+
+
+
+                                 Page 21 of 38
+
+    Complete STROFF Manual — Paragraphs and Text Formatting
 
 
 Line Control
 ------------
 
 
+        Sometimes you need more precise control over line breaks:
 
     Command                    Description                                  
     ------------------------------------------------------------------------
     .BREAK                     Force line break within paragraph            
 
 
-
-
-
-                                 Page 20 of 30
-
-    My Document — Paragraphs and Text Formatting
-
+        The  .BREAK  command  allows  you  to  force  a  line break within a
+    paragraph   without  starting  a  new  paragraph.  This  is  useful  for
+    addresses, poetry, or any situation where you need specific line breaks.
 
 Lists and Structured Content
 ============================
 
+
+        Lists  are essential elements for organizing information clearly and
+    systematically. STROFF provides a complete and flexible list system that
+    handles automatic numbering and proper formatting.
+
+
+
+                                 Page 22 of 38
+
+    Complete STROFF Manual — Lists and Structured Content
 
 
 Basic List Syntax
 -----------------
 
 
+        Lists in STROFF follow a simple pattern: start with .LIST, add items
+    with .ITEM, and close with .ELIST:
+
+    .LIST TYPE=BULLET CHAR=* INDENT=4
+    .ITEM "First list item"
+    .ITEM "Second list item"
+    .ITEM "Third list item"
+    .ELIST
 
 
-        * First list item
-        * Second list item
-        * Third list item
-
-
-
+        The  TYPE  parameter  determines  the list style, CHAR specifies the
+    bullet  character  (for  bullet lists), and INDENT controls how much the
+    list is indented from the left margin.
 
 List Types
 ----------
 
 
+        STROFF  supports  three  list  types, each appropriate for different
+    situations:
 
 
-                                 Page 21 of 30
 
-    My Document — Lists and Structured Content
+                                 Page 23 of 38
 
+    Complete STROFF Manual — Lists and Structured Content
 
 
 Bullet Lists
 
 
+        Bullet lists use a character to mark each item:
+
+    .LIST TYPE=BULLET CHAR=• INDENT=4
+    .ITEM "First item with bullet"
+    .ITEM "Second item with bullet"
+    .ITEM "Third item with bullet"
+    .ELIST
 
 
-        * First item with bullet
-        * Second item with bullet
-        * Third item with bullet
-
-
-
+        You  can  use  any  character as a bullet: *, -, •, →, ▪, etc.
+    Choose the character that best fits your document's style.
 
 Numbered Lists
 
 
+        Numbered lists automatically number items starting from 1:
+
+    .LIST TYPE=NUMBER INDENT=4
+    .ITEM "First numbered item"
+    .ITEM "Second numbered item"
+    .ITEM "Third numbered item"
+    .ELIST
 
 
-        1.  First numbered item
-        2.  Second numbered item
-        3.  Third numbered item
+        STROFF  handles  numbering automatically, so you can add, remove, or
+    reorder items without worrying about manual renumbering.
 
 
 
 
 
+                                 Page 24 of 38
 
-
-                                 Page 22 of 30
-
-    My Document — Lists and Structured Content
+    Complete STROFF Manual — Lists and Structured Content
 
 
 Roman Numeral Lists
 
 
+        Roman numeral lists use Roman numerals (I, II, III, etc.):
+
+    .LIST TYPE=RNUMBER INDENT=4
+    .ITEM "First Roman item"
+    .ITEM "Second Roman item"
+    .ITEM "Third Roman item"
+    .ELIST
 
 
-        I    First Roman item
-        II   Second Roman item
-        III  Third Roman item
-
-
-
+        This  list  type  is  useful  for  formal  documents,  outlines, and
+    situations requiring a more classical presentation.
 
 Text Wrapping in Lists
 ----------------------
 
 
+        List  items  automatically  wrap when they exceed the available line
+    width.  STROFF ensures that continuation lines are properly aligned with
+    the item text, not the bullet or number.
+
+    .LIST TYPE=BULLET CHAR=→ INDENT=4
+    .ITEM "This is a very long list item that will automatically wrap to multiple lines while maintaining proper alignment and professional appearance"
+    .ITEM "Another item to demonstrate formatting"
+    .ELIST
 
 
-        * This is a very long list item that will automatically wrap to
-          multiple lines while maintaining proper alignment and professional
-          appearance
-        * Another item to demonstrate formatting
+        This  ensures  that even complex list items maintain readability and
+    professional appearance.
 
 
+                                 Page 25 of 38
 
+    Complete STROFF Manual — Lists and Structured Content
 
-
-
-                                 Page 23 of 30
-
-    My Document — Lists and Structured Content
 
 
 Tables and Structured Data
 ==========================
 
 
+        Tables are essential elements for presenting structured data clearly
+    and  professionally.  STROFF  implements  a  complete  table system that
+    automatically handles formatting, alignment, and visual presentation.
 
 Basic Table Syntax
 ------------------
 
 
+        Tables  follow  a  clear  structure:  definition  (.TABLE), optional
+    headers (.TH), data rows (.TR), and closing (.ETABLE):
+
+    .TABLE COLS=3 WIDTHS=20,15,25 ALIGNS=L,C,R NAME="My Table"
+    .TH "Header 1" "Header 2" "Header 3"
+    .TLINE
+    .TR "Data 1" "Data 2" "Data 3"
+    .TR "More data" "Center" "Right"
+    .ETABLE
 
 
-    Header 1                 Header 2                       Header 3
-    ----------------------------------------------------------------
-    Data 1                    Data 2                          Data 3
-    More data                 Center                           Right
 
+
+
+
+                                 Page 26 of 38
+
+    Complete STROFF Manual — Tables and Structured Data
 
 
 Configuration Parameters
 ------------------------
 
 
+        The  .TABLE  directive accepts several parameters that control table
+    structure and appearance:
 
     Parameter        Description                Example                            
     -------------------------------------------------------------------------------
@@ -720,24 +809,31 @@ Configuration Parameters
     NAME=\           text\                                                         
 
 
+        COLS  is  mandatory and must match the number of columns you provide
+    in  rows.  WIDTHS  specifies  the width of each column; if not provided,
+    STROFF distributes available space evenly.
 
+        ALIGNS controls content alignment in each column:
 
         * L: Left alignment (appropriate for text)
         * C: Center alignment (appropriate for headers or short data)
-
-
-                                 Page 24 of 30
-
-    My Document — Tables and Structured Data
-
-
         * R: Right alignment (appropriate for numbers)
+
+
+
+
+
+
+                                 Page 27 of 38
+
+    Complete STROFF Manual — Tables and Structured Data
 
 
 Table Elements
 --------------
 
 
+        Tables can contain different types of rows:
 
     Command          Description                                            
     ------------------------------------------------------------------------
@@ -746,12 +842,31 @@ Table Elements
     .TLINE           Horizontal separator line                              
 
 
+        Header  rows  (.TH)  are formatted as the first row of the table and
+    can  be visually separated from content using .TLINE. Regular rows (.TR)
+    contain  normal  table  data. Use .TLINE to create horizontal separators
+    where you need to visually divide table sections.
+
+        Each  row  must  contain exactly the number of elements specified in
+    COLS.  Elements  are  separated  by  spaces  and  must be quoted if they
+    contain internal spaces.
+
+
+
+
+
+
+                                 Page 28 of 38
+
+    Complete STROFF Manual — Tables and Structured Data
 
 
 Automatic Visual Formatting
 ---------------------------
 
 
+        STROFF  generates  tables  with  clean  and  professional formatting
+    without external borders. The formatting features include:
 
         * Uniform spacing between columns (2 spaces)
         * Precise alignment according to specifications (L, C, R)
@@ -759,88 +874,122 @@ Automatic Visual Formatting
         * Optional separators with the .TLINE directive
 
 
+        To  create  horizontal  separators  within  tables,  use  the .TLINE
+    directive at any point between .TH, .TR, or before .ETABLE:
+
+    .TABLE COLS=2 WIDTHS=20,30 ALIGNS=L,R
+    .TH "Header 1" "Header 2"
+    .TLINE
+    .TR "Data 1" "Value 1"
+    .TR "Data 2" "Value 2"
+    .TLINE
+    .TR "Total" "Sum"
+    .ETABLE
 
 
-                                 Page 25 of 30
-
-    My Document — Tables and Structured Data
-
-
+        The  result  is a professional and readable table that automatically
+    adapts to specified widths and maintains correct alignment regardless of
+    content.
 
 
-    Header 1                                    Header 2
-    ----------------------------------------------------
-    Data 1                                       Value 1
-    Data 2                                       Value 2
-    ----------------------------------------------------
-    Total                                            Sum
 
+                                 Page 29 of 38
 
+    Complete STROFF Manual — Tables and Structured Data
 
 
 Code Blocks and Literal Text
 ============================
 
 
+        For  technical documentation, programming manuals, and any situation
+    where  you  need  to  show text exactly as written, STROFF provides code
+    blocks that preserve original formatting.
 
 Code Block Syntax
 -----------------
 
 
+        Code blocks are delimited with .CODE and .ECODE:
+
+    .CODE
+    function example() {
+        if (condition) {
+            return "preserved formatting";
+        }
+    }
 
 
 
+        Everything  between  these directives is treated as literal text: no
+    text  wrapping,  no  justification,  no command interpretation. Only the
+    configured margins are respected.
 
+
+
+                                 Page 30 of 38
+
+    Complete STROFF Manual — Code Blocks and Literal Text
 
 
 When to Use Code Blocks
 -----------------------
 
 
+        Code blocks are ideal for:
 
         * Programming code in any language
-
-
-                                 Page 26 of 30
-
-    My Document — Code Blocks and Literal Text
-
-
         * Configuration file examples
         * Command line examples
         * ASCII art or diagrams
         * Any text requiring exact formatting preservation
 
 
+        Remember  that within code blocks, even lines starting with dots are
+    treated as literal text, not as STROFF commands.
 
 Page Control and Pagination
 ===========================
 
 
 
+
+                                 Page 31 of 38
+
+    Complete STROFF Manual — Page Control and Pagination
+
+
+        STROFF  provides advanced pagination control that goes beyond simple
+    automatic  page  breaks.  Understanding  these  mechanisms allows you to
+    create documents with professional page layout.
+
 Manual Page Control
 -------------------
 
 
+        Sometimes  automatic  pagination  isn't  enough and you need precise
+    control:
 
     Command               Description                                       
     ------------------------------------------------------------------------
     .PAGEBREAK            Force immediate page break                        
 
 
-
-
-
-
-                                 Page 27 of 30
-
-    My Document — Page Control and Pagination
-
+        Use  .PAGEBREAK when you need to ensure that specific content starts
+    on a new page, such as new chapters or important sections.
 
 Headers and Footers in Pagination
 ---------------------------------
 
 
+
+
+                                 Page 32 of 38
+
+    Complete STROFF Manual — Page Control and Pagination
+
+
+        STROFF handles headers and footers intelligently:
 
         * Headers appear only on chapter pages, not on title or index pages
         * Footers appear on all pages if configured
@@ -848,26 +997,31 @@ Headers and Footers in Pagination
         * Pages are automatically filled to PAGEHEIGHT if configured
 
 
+        This  intelligent  behavior  ensures  that  special pages like title
+    pages  and indexes maintain their clean appearance while regular content
+    pages show contextual information.
 
 Advanced Variables and Substitution
 ===================================
 
 
+        STROFF's  variable  system  allows you to create dynamic headers and
+    footers  that automatically update with document content. This system is
+    particularly powerful for long documents with complex structure.
 
 
 
+                                 Page 33 of 38
 
-
-
-                                 Page 28 of 30
-
-    My Document — Advanced Variables and Substitution
+    Complete STROFF Manual — Advanced Variables and Substitution
 
 
 Available Variables
 -------------------
 
 
+        The  following  variables  are  available  for  use  in  headers and
+    footers:
 
     Variable              Description                                       
     ------------------------------------------------------------------------
@@ -879,32 +1033,95 @@ Available Variables
     {PAGES}               Total pages (available after first pass)          
 
 
+        These   variables  are  automatically  substituted  during  document
+    processing, ensuring that headers and footers always reflect the current
+    document state.
 
 Using Variables Effectively
 ---------------------------
 
 
+        Here are some effective patterns for using variables:
+
+    # Show document and chapter in header
+    .HEADER "{TITLE} — {CHAPTITLE}"
+    
+    # Show page numbers in footer
+    .FOOTER "Page {PAGE} of {PAGES}"
+    
+    # Show full hierarchy in header
+    .HEADER "{CHAPTITLE} / {SUBCHAP} / {SUBSUBCHAP}"
 
 
+        Variables  that  are empty (like {SUBCHAP} when not in a subchapter)
 
+
+                                 Page 34 of 38
+
+    Complete STROFF Manual — Advanced Variables and Substitution
+
+
+    are simply omitted from the output, avoiding awkward blank spaces.
+
+Modular Documents with .INCLUDE
+-------------------------------
+
+
+        The  .INCLUDE directive lets you split large documents into multiple
+    STROFF  files and assemble them automatically during processing. This is
+    perfect  for books, multilingual manuals, or any workflow where chapters
+    live in dedicated directories.
+
+    .INCLUDE "chapters/introduction.str"
+    .INCLUDE "../appendices/references.str"
+
+
+        Each  relative  path  is  resolved  against the file that issues the
+    directive,  so  every  chapter  can  keep its own local includes without
+    worrying about where the main document resides.
+
+        * Up to 16 nested includes are supported to guard against infinite
+          recursion.
+        * Included files may contain any directive, including additional
+          .INCLUDE commands.
+
+
+                                 Page 35 of 38
+
+    Complete STROFF Manual — Advanced Variables and Substitution
+
+
+        * Formatting context (lists, tables, paragraphs) continues
+          seamlessly across includes.
+        * Store shared snippets under directories like `chapters/` or
+          `shared/` to keep things organised.
+
+
+        To avoid circular dependencies, design a clear include hierarchy and
+    limit  cross-inclusions  between  sibling  files.  When  reusing content
+    across  different  manuals,  keep  common building blocks in a dedicated
+    `shared/` folder.
 
 Best Practices and Workflow
 ===========================
 
 
+        To make the most of STROFF, it's important to establish an efficient
+    workflow and follow best practices developed through experience.
 
 
 
 
-                                 Page 29 of 30
+                                 Page 36 of 38
 
-    Best Practices and Workflow / Using Variables Effectively / Roman Numeral Lists
+    Complete STROFF Manual — Best Practices and Workflow
 
 
 Document Planning
 -----------------
 
 
+        Before starting to write, plan your document structure:
 
         1.  Define the hierarchical structure (chapters, sections)
         2.  Decide on formatting parameters (page width, margins)
@@ -912,9 +1129,19 @@ Document Planning
         4.  Consider whether you'll need indexes and cross-references
 
 
+        This  planning  saves  time  later  and  ensures  a consistent final
+    result.
 
 Development Workflow
 --------------------
+
+
+        A recommended workflow for STROFF documents:
+
+
+                                 Page 37 of 38
+
+    Complete STROFF Manual — Best Practices and Workflow
 
 
 
@@ -922,13 +1149,6 @@ Development Workflow
         2.  Write content focusing on structure over formatting
         3.  Add tables, lists, and special elements as needed
         4.  Configure headers, footers, and indexes
-
-
-                                 Page 30 of 30
-
-    Best Practices and Workflow / Development Workflow / Roman Numeral Lists
-
-
         5.  Review and adjust formatting parameters
         6.  Generate final output and review
 
@@ -937,6 +1157,8 @@ Version Control
 ---------------
 
 
+        Since  STROFF  documents  are  plain  text, they work perfectly with
+    version control systems:
 
         * Use Git or similar systems to track changes
         * Commit frequently with descriptive messages
@@ -944,11 +1166,21 @@ Version Control
         * Tag stable versions for releases
 
 
+
+
+                                 Page 38 of 38
+
+    Complete STROFF Manual — Best Practices and Workflow
+
+
 Troubleshooting and Common Problems
 ===================================
 
 
+        Even  with  good  planning,  problems can arise when creating STROFF
+    documents. Here are the most common issues and their solutions.
 
+        The most frequent problems when learning STROFF:
 
     Problem                              Solution                           
     ------------------------------------------------------------------------
@@ -959,13 +1191,7 @@ Troubleshooting and Common Problems
     Missing parameters: .TABLE without specifying COLS  Always specify required parameters 
 
 
-
-
-                                 Page 31 of 30
-
-    Troubleshooting and Common Problems / Version Control / Roman Numeral Lists
-
-
+        When things don't work as expected:
 
         1.  Verify that all commands start with a dot and are on their own
             line
@@ -976,6 +1202,15 @@ Troubleshooting and Common Problems
         5.  Make sure .DOCUMENT and .EDOC are present and properly placed
 
 
+
+
+                                 Page 39 of 38
+
+    Complete STROFF Manual — Troubleshooting and Common Problems
+
+
+        This  section  provides  a  comprehensive  reference  of  all STROFF
+    commands organized by category.
 
     Command                    Description                                  
     ------------------------------------------------------------------------
@@ -1027,6 +1262,9 @@ Troubleshooting and Common Problems
     .ETABLE                    End table                                    
 
 
+        This completes the comprehensive STROFF manual. With these tools and
+    concepts,  you're ready to create professional, well-formatted documents
+    that meet the highest typographic standards.
 
 
 
@@ -1038,4 +1276,7 @@ Troubleshooting and Common Problems
 
 
 
-                                 Page 32 of 30
+
+
+
+                                 Page 40 of 38

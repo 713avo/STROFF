@@ -13,6 +13,7 @@ STROFF es un lenguaje de marcas para la creación de documentos de texto formate
 - **Índices automáticos**: Tabla de contenidos e índice de tablas
 - **Elementos avanzados**: Listas, tablas, bloques de código
 - **Variables dinámicas**: Sustitución automática en headers y footers
+- **Documentos modulares**: Inclusión de secciones externas con rutas relativas mediante `.INCLUDE`
 
 ## Estructura de un Documento
 
@@ -211,6 +212,17 @@ El sistema maneja automáticamente:
 - No aplica justificación ni text wrapping
 - Respeta márgenes configurados
 
+### Inclusión de Archivos
+
+```
+.INCLUDE "capitulos/introduccion.str"
+```
+
+- Inserta otro archivo STROFF en el punto actual.
+- Las rutas relativas se resuelven respecto al archivo que emite la directiva.
+- Se admite una profundidad máxima de 16 inclusiones anidadas para evitar ciclos infinitos.
+- Ideal para construir documentos modulares reutilizando capítulos y apéndices.
+
 ## Comentarios
 
 ```
@@ -273,8 +285,8 @@ en múltiples líneas respetando el ancho de página configurado.
 ## Notas de Implementación
 
 - **Compilación**: `gcc src/*.c -o stroff`
-- **Uso**: `./stroff archivo.trf archivo.txt`
-- **Extensiones**: `.trf` para archivos STROFF, `.txt` para salida
+- **Uso**: `./stroff archivo.str archivo.txt`
+- **Extensiones**: `.str` (compatible con `.trf`) para archivos STROFF, `.txt` para salida
 - **Codificación**: UTF-8 soportado para texto unicode
 - **Límites**: Máximo 100 capítulos, 50 tablas, líneas de 1024 caracteres
 
